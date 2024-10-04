@@ -11,7 +11,7 @@ use Modules\Customers\Repositories\CustomersRepository;
 
         public function __construct(
             CustomersRepository $customersRepository
-            ){
+            ) {
                 $this->customersRepository = $customersRepository;
             }
 

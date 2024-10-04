@@ -2,13 +2,29 @@
 namespace Modules\Customers\Repositories;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Modules\Customers\Http\Requests\CustomerRequest;
 use Modules\Customers\Models\Customer;
 use Modules\Customers\Models\CustomerHistoryManager;
 
 class CustomersRepository {
 
-    public function getOne($id){
+    public function getAllWithPagination(int $perPage = 15, Request $request):LengthAwarePaginator {
+        $customers = Customer::query();
+
+        if($request->input('name') !== null){
+            $customers->where('name', 'like', '%' . $request->input('name') . '%' . '%');
+        }
+
+        if($request->input('manager') !== null){
+            $customers->where('user_id', $request->input('manager'));
+        }
+
+        return $customers->paginate($perPage);
+    }
+
+
+    public function getOne($id):Customer {
         $customer = Customer::findOrFail($id);
 
         return $customer;
@@ -31,7 +47,6 @@ class CustomersRepository {
         $customer->save();
 
         return $customer;
-
     }
 
     public function storeHistoryManager(int $user, int $customer):CustomerHistoryManager {

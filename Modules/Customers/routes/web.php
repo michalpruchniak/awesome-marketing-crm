@@ -17,6 +17,14 @@ use Modules\Customers\Http\Controllers\CustomersController;
 Route::prefix('customers')
      ->middleware('auth')
      ->group(function () {
+        Route::get('',
+            [CustomersController::class, 'index'])
+            ->name('customers.list');
+
+        Route::get('show/{id}',
+            [CustomersController::class, 'show'])
+            ->name('customers.show');
+
         Route::get('create',
             [CustomersController::class, 'create'])
             ->name('customers.create');
