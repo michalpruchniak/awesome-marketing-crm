@@ -1,0 +1,11 @@
+{
+    "name": "Histories",
+    "alias": "histories",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Histories\\Providers\\HistoriesServiceProvider"
+    ],
+    "files": []
+}

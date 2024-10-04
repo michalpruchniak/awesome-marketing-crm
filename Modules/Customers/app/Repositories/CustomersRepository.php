@@ -5,7 +5,6 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Modules\Customers\Http\Requests\CustomerRequest;
 use Modules\Customers\Models\Customer;
-use Modules\Customers\Models\CustomerHistoryManager;
 
 class CustomersRepository {
 
@@ -47,14 +46,5 @@ class CustomersRepository {
         $customer->save();
 
         return $customer;
-    }
-
-    public function storeHistoryManager(int $user, int $customer):CustomerHistoryManager {
-        $customerHistoryManager = CustomerHistoryManager::create([
-            'user_id'=> $user,
-            'customer_id'=> $customer
-        ]);
-
-        return $customerHistoryManager;
     }
 }

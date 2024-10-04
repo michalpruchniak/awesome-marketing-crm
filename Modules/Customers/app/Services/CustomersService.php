@@ -1,9 +1,9 @@
 <?php
 namespace Modules\Customers\Services;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Customers\Http\Requests\CustomerRequest;
+use Modules\Customers\Models\Customer;
 use Modules\Customers\Repositories\CustomersRepository;
 
     class CustomersService{
@@ -15,17 +15,18 @@ use Modules\Customers\Repositories\CustomersRepository;
                 $this->customersRepository = $customersRepository;
             }
 
-        public function createNewCustomer(CustomerRequest $request):void {
+        public function createNewCustomer(CustomerRequest $request):Customer {
             $request = $this->checkUser($request);
-
             $customer = $this->customersRepository->storeCustomer($request);
-            $this->customersRepository->storeHistoryManager($request->user, $customer->id);
+
+            return $customer;
         }
 
-        public function updateCustomer(int $id, CustomerRequest $request):void {
+        public function updateCustomer(int $id, CustomerRequest $request):Customer {
             $request = $this->checkUser($request);
+            $customer = $this->customersRepository->updateCustomer($id, $request);
 
-            $this->customersRepository->updateCustomer($id, $request);
+            return $customer;
         }
 
         private function checkUser(CustomerRequest $request):CustomerRequest {

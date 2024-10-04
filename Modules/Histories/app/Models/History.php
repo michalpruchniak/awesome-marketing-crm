@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Customers\Models;
+namespace Modules\Histories\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Modules\Customers\Database\Factories\CustomerHistoryManagerFactory;
+// use Modules\Histories\Database\Factories\HistoryFactory;
 
-class CustomerHistoryManager extends Model
+class History extends Model
 {
     use HasFactory;
 
@@ -15,6 +15,7 @@ class CustomerHistoryManager extends Model
      */
     protected $fillable = [
         'user_id',
-        'customer_id'
+        'customer_id',
+        'message'
     ];
 }

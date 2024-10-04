@@ -1,4 +1,5 @@
 {
     "Users": true,
-    "Customers": true
+    "Customers": true,
+    "Histories": true
 }
