@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Hash;
 use Modules\Customers\Models\Customer;
+use Modules\Histories\Models\History;
 
 class User extends Authenticatable
 {
@@ -51,5 +52,9 @@ class User extends Authenticatable
 
     public function customers() {
         return $this->hasMany(Customer::class);
+    }
+
+    public function histories() {
+        return $this->hasMany(History::class);
     }
 }

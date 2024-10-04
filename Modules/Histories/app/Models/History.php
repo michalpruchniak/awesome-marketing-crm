@@ -2,6 +2,7 @@
 
 namespace Modules\Histories\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Customers\Models\Customer;
@@ -20,6 +21,10 @@ class History extends Model
         'customer_id',
         'message'
     ];
+
+    public function user() {
+        return $this->belongsto(User::class);
+    }
 
     public function customer() {
         return $this->belongTo(Customer::class);

@@ -19,7 +19,7 @@
                 <p class="card-text">{{ $history->message }}</p>
             @endforeach
         </div>
-        <a href="{{ route('customers.edit', ['id' => $customer->id]) }}" class="btn btn-primary">Show all</a>
+        <a href="{{ route('histories.show', ['id' => $customer->id]) }}" class="btn btn-primary">Show all</a>
         </div>
     </div>
 </div>

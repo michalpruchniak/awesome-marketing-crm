@@ -8,6 +8,14 @@ use Modules\Histories\Models\History;
 
 class HistoriesRepository
 {
+
+    public function show(int $id):Collection {
+        $customer = Customer::findOrFail($id);
+        $histories = $customer->histories;
+
+        return $histories;
+    }
+
     public function store(int $user_id=null, int $customer_id, string $message):History {
         $history = History::create([
                 'user_id' => $user_id,

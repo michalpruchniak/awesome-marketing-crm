@@ -14,6 +14,11 @@ use Modules\Histories\Http\Controllers\HistoriesController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('histories', HistoriesController::class)->names('histories');
+Route::prefix('histories')
+     ->middleware('auth')
+     ->group(function () {
+        Route::get('show/{id}',
+            [HistoriesController::class, 'show'])
+            ->name('histories.show');
+
 });
