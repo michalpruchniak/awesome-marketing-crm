@@ -1,7 +1,4 @@
 {
     "Users": true,
-    "Client": true,
-    "Clients": true,
-    "Blogs": true,
     "Customers": true
 }
