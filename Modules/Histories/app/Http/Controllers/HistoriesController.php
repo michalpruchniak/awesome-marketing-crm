@@ -18,7 +18,6 @@ class HistoriesController extends Controller
     ){
         $this->historiesRepository = $historiesRepository;
         $this->customersRepository = $customersRepository;
-
     }
 
     public function show(int $id) {
