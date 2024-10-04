@@ -1,6 +1,6 @@
 @extends('layouts.panel')
 @section('content')
-<form action={{ route('customers.store') }} method="post">
+<form action=@if(isset($customer)) {{ route('customers.update', ['id' => $customer->id]) }} @else {{ route('customers.store') }} @endif method="post">
     @csrf
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -22,14 +22,11 @@
         id="name"
         placeholder="Name"
         value=
-            @if(isset($user))
-             {{ $user->name }}
+            @if(isset($customer))
+             {{ $customer->name }}
             @else
              {{ old('name') }}
             @endif>
-            @if($errors->has('firstname'))
-            <div class="error">{{ $errors->first('firstname') }}</div>
-        @endif
     </div>
     @can('add user to customer')
         <div class="form-group">

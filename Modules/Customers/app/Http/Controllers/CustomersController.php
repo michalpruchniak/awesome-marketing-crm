@@ -13,14 +13,18 @@ class CustomersController extends Controller
 {
 
     private $usersRepository;
+    private $customersRepository;
     private $customersService;
+
 
     public function __construct(
         UsersRepository $usersRepository,
-        CustomersService $customersService
+        CustomersService $customersService,
+        CustomersRepository $customersRepository
         ){
         $this->usersRepository = $usersRepository;
         $this->customersService = $customersService;
+        $this->customersRepository = $customersRepository;
     }
 
     public function create()
@@ -34,7 +38,23 @@ class CustomersController extends Controller
     public function store(CustomerRequest $request)
     {
         $this->customersService->createNewCustomer($request);
+
         return redirect()->back();
+    }
+
+    public function edit($id)
+    {
+        $customer = $this->customersRepository->getOne($id);
+
+        return view('customers::create')
+                ->with('customer', $customer)
+                ->with('headerTitle', 'Edit customer ' . $customer->name)
+                ->with('mainTitle', 'Edit customer ' . $customer->name)
+                ->with('users', $this->usersRepository->getAll());
+    }
+
+    public function update($id, CustomerRequest $request){
+        $this->customersRepository->updateCustomer($id, $request);
     }
 
 }

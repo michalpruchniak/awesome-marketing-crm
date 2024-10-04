@@ -8,17 +8,33 @@ use Modules\Customers\Models\CustomerHistoryManager;
 
 class CustomersRepository {
 
-    public function storeCustomer(CustomerRequest $request): Customer{
+    public function getOne($id){
+        $customer = Customer::findOrFail($id);
+
+        return $customer;
+    }
+
+    public function storeCustomer(CustomerRequest $request):Customer {
         $customer = Customer::create([
-            'user_id' => $request->user,
-            'name' => $request->name
+            'name' => $request->name,
+            'user_id' => $request->user
         ]);
+
+        return $customer;
+    }
+
+    public function updateCustomer(int $id, CustomerRequest $request):Customer {
+        $customer = $this->getOne($id);
+        $customer->name = $request->name;
+        $customer->user_id = $request->user;
+
+        $customer->save();
 
         return $customer;
 
     }
 
-    public function storeHistoryManager(int $user, int $customer): CustomerHistoryManager{
+    public function storeHistoryManager(int $user, int $customer):CustomerHistoryManager {
         $customerHistoryManager = CustomerHistoryManager::create([
             'user_id'=> $user,
             'customer_id'=> $customer

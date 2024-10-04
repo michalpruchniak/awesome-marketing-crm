@@ -24,4 +24,12 @@ Route::prefix('customers')
         Route::post('store',
             [CustomersController::class, 'store'])
             ->name('customers.store');
+
+        Route::get('edit/{id}',
+            [CustomersController::class, 'edit'])
+            ->name('customers.edit');
+
+        Route::post('update/{id}',
+            [CustomersController::class, 'update'])
+            ->name('customers.update');
 });
