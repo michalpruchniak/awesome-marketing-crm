@@ -49,7 +49,7 @@
             </select>
         </div>
         <div class="form-check mb-2">
-            <input class="form-check-input" type="checkbox" value="1" id="lead" name="lead" @if(isset($customer) && $customer->load === 1) checked @elseif (empty($customer)) checked @else {{ old('lead') }} @endif>
+            <input class="form-check-input" type="checkbox" value="1" id="lead" name="lead" @if(isset($customer) && $customer->lead === 1) checked @elseif (empty($customer)) checked @else {{ old('lead') }} @endif>
             <label class="form-check-label" for="lead">
               Lead
             </label>

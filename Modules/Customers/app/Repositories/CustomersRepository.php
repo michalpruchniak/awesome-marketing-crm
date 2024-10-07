@@ -24,6 +24,12 @@ class CustomersRepository {
             $customers->where('user_id', $request->input('manager'));
         }
 
+        if($request->input('active') === "1"){
+            $customers->where('active', 1);
+        }
+
+
+
         return $customers->paginate($perPage);
     }
 
@@ -42,6 +48,8 @@ class CustomersRepository {
         $customer = $this->getOne($id);
         $customer->name = $request->name;
         $customer->user_id = $request->user;
+        $customer->active = $request->active;
+        $customer->lead = $request->lead;
 
         $customer->save();
 

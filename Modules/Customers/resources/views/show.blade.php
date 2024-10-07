@@ -7,6 +7,8 @@
         <p class="card-text">
             <p><strong>Name:</strong> {{ $customer->name }}</p>
             <p><strong>Manager:</strong> {{ $customer->user->name }}</p>
+            <p><strong>Lead:</strong> @if($customer->lead === 1) Yes @else No @endif</p>
+            <p><strong>Active:</strong> @if($customer->active === 1) Yes @else No @endif</p>
         </p>
         @can("add new customer")
             <a href="{{ route('customers.edit', ['id' => $customer->id]) }}" class="btn btn-primary">Edit</a>

@@ -15,6 +15,14 @@
                 </select>
         </div>
         <div class="col-12 col-md-2">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="1" id="active" name="active" checked>
+                <label class="form-check-label" for="active">
+                  Active
+                </label>
+              </div>
+        </div>
+        <div class="col-12 col-md-2">
             <button class="btn btn-primary" type="submit">Search</button>
         </div>
     </div>
@@ -29,7 +37,7 @@
     </thead>
     <tbody>
         @foreach ($customers as $customer)
-        <tr>
+        <tr class="@if($customer->active == 0) table-danger @elseif ($customer->lead == 1) table-primary @endif">
             <th scope="row">{{ $customer->id }}</th>
             <td><a href="{{ route('customers.show', ['id' => $customer->id]) }}">{{ $customer->name }}</a></td>
             <td>{{ $customer->user->name }}</td>
