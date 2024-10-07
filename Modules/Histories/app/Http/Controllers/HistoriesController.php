@@ -3,26 +3,26 @@
 namespace Modules\Histories\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\View\View;
 use Modules\Customers\Repositories\CustomersRepository;
-use Modules\Histories\Repositories\HistoriesRepository;
+use Modules\Histories\Services\HistoriesService;
 
 class HistoriesController extends Controller
 {
-    private $historiesRepository;
     private $customersRepository;
+    private $historiesService;
 
     public function __construct(
-        HistoriesRepository $historiesRepository,
         CustomersRepository $customersRepository,
+        HistoriesService $historiesService
     ){
-        $this->historiesRepository = $historiesRepository;
         $this->customersRepository = $customersRepository;
+        $this->historiesService = $historiesService;
     }
 
-    public function show(int $id) {
+    public function show(int $id):View {
         $customer = $this->customersRepository->getOne($id);
-        $histories = $this->historiesRepository->show($id);
+        $histories = $this->historiesService->getForCustomer($id);
 
         return view('histories::show')
                 ->with('mainTitle', 'Histories of ' . $customer->name)

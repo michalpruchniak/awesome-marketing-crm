@@ -8,8 +8,7 @@ use Modules\Histories\Models\History;
 
 class HistoriesRepository
 {
-
-    public function show(int $id):Collection {
+    public function getForCustomer(int $id):Collection {
         $customer = Customer::findOrFail($id);
         $histories = $customer->histories;
 
