@@ -8,35 +8,31 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Customers\Http\Requests\CustomerRequest;
-use Modules\Customers\Repositories\CustomersRepository;
 use Modules\Customers\Services\CustomersService;
-use Modules\Histories\Repositories\HistoriesRepository;
+use Modules\Histories\Services\HistoriesService;
 use Modules\Users\Repositories\UsersRepository;
 
 class CustomersController extends Controller
 {
 
     private $usersRepository;
-    private $customersRepository;
     private $customersService;
-    private $historiesRepository;
+    private $historiesService;
     private $users;
 
     public function __construct(
         UsersRepository $usersRepository,
         CustomersService $customersService,
-        CustomersRepository $customersRepository,
-        HistoriesRepository $historiesRepository
+        HistoriesService $historiesService
         ){
         $this->usersRepository = $usersRepository;
         $this->customersService = $customersService;
-        $this->customersRepository = $customersRepository;
-        $this->historiesRepository = $historiesRepository;
+        $this->historiesService = $historiesService;
         $this->users = $this->usersRepository->getAll();
     }
 
     public function index(Request $request):View {
-        $customers = $this->customersRepository->getAllWithPagination(15, $request);
+        $customers = $this->customersService->getAllWithPagination(15, $request);
 
         return view('customers::list')
                 ->with('mainTitle', 'List of customers')
@@ -46,7 +42,7 @@ class CustomersController extends Controller
     }
 
     public function show($id):View {
-        $customer = $this->customersRepository->getOne($id);
+        $customer = $this->customersService->getOne($id);
 
         return view('customers::show')
                 ->with('mainTitle', 'Show and modify customer ' . $customer->name)
@@ -65,13 +61,13 @@ class CustomersController extends Controller
         $customer = $this->customersService->createNewCustomer($request);
 
         $message = 'User ' . $customer->user->name . ' was added customer ' . $customer->name;
-        $this->historiesRepository->store(Auth::id(), $customer->id, $message);
+        $this->historiesService->store(Auth::id(), $customer->id, $message);
 
         return redirect()->route('customers.show', ['id' => $customer->id]);
     }
 
     public function edit($id):View {
-        $customer = $this->customersRepository->getOne($id);
+        $customer = $this->customersService->getOne($id);
 
         return view('customers::create')
                 ->with('customer', $customer)
@@ -84,7 +80,7 @@ class CustomersController extends Controller
         $customer = $this->customersService->updateCustomer($id, $request);
 
         $message = 'User ' . $customer->user->name . ' was updated customer ' . $customer->name;
-        $this->historiesRepository->store(Auth::id(), $customer->id, $message);
+        $this->historiesService->store(Auth::id(), $customer->id, $message);
 
         return redirect()->route('customers.show', ['id' => $customer->id]);
     }

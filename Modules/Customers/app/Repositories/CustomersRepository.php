@@ -7,6 +7,11 @@ use Modules\Customers\Http\Requests\CustomerRequest;
 use Modules\Customers\Models\Customer;
 
 class CustomersRepository {
+    public function getOne($id):Customer {
+        $customer = Customer::findOrFail($id);
+
+        return $customer;
+    }
 
     public function getAllWithPagination(int $perPage = 15, Request $request):LengthAwarePaginator {
         $customers = Customer::query();
@@ -20,13 +25,6 @@ class CustomersRepository {
         }
 
         return $customers->paginate($perPage);
-    }
-
-
-    public function getOne($id):Customer {
-        $customer = Customer::findOrFail($id);
-
-        return $customer;
     }
 
     public function storeCustomer(CustomerRequest $request):Customer {
