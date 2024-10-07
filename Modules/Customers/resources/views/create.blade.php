@@ -23,9 +23,9 @@
         placeholder="Name"
         value=
             @if(isset($customer))
-             {{ $customer->name }}
+             "{{ $customer->name }}"
             @else
-             {{ old('name') }}
+             "{{ old('name') }}"
             @endif>
     </div>
     @can('add user to customer')

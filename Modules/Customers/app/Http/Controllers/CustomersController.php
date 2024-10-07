@@ -11,24 +11,25 @@ use Modules\Customers\Http\Requests\CustomerRequest;
 use Modules\Customers\Services\CustomersService;
 use Modules\Histories\Services\HistoriesService;
 use Modules\Users\Repositories\UsersRepository;
+use Modules\Users\Services\UsersService;
 
 class CustomersController extends Controller
 {
 
-    private $usersRepository;
+    private $usersService;
     private $customersService;
     private $historiesService;
     private $users;
 
     public function __construct(
-        UsersRepository $usersRepository,
+        UsersService $usersService,
         CustomersService $customersService,
         HistoriesService $historiesService
         ){
-        $this->usersRepository = $usersRepository;
+        $this->usersService = $usersService;
         $this->customersService = $customersService;
         $this->historiesService = $historiesService;
-        $this->users = $this->usersRepository->getAll();
+        $this->users = $this->usersService->getAll();
     }
 
     public function index(Request $request):View {

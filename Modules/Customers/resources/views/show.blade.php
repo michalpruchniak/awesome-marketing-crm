@@ -8,7 +8,10 @@
             <p><strong>Name:</strong> {{ $customer->name }}</p>
             <p><strong>Manager:</strong> {{ $customer->user->name }}</p>
         </p>
-        <a href="{{ route('customers.edit', ['id' => $customer->id]) }}" class="btn btn-primary">Edit</a>
+        @can("add new customer")
+            <a href="{{ route('customers.edit', ['id' => $customer->id]) }}" class="btn btn-primary">Edit</a>
+        @endcan
+
         </div>
     </div>
     <div class="card col-12 col-md-5">

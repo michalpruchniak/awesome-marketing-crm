@@ -22,9 +22,11 @@ class UserTableSeeder extends Seeder
         ]);
 
         $createNewUsersPermission = Permission::create(['name' => 'create new Users']);
+        $addNewCustomer = Permission::create(['name' => 'add new customer']);
         $addUserToCustomerPermission = Permission::create(['name' => 'add user to customer']);
 
         $adminRole->givePermissionTo($createNewUsersPermission);
+        $adminRole->givePermissionTo($addNewCustomer);
         $adminRole->givePermissionTo($addUserToCustomerPermission);
 
         $adminUser = User::create([

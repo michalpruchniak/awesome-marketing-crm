@@ -27,17 +27,21 @@ Route::prefix('customers')
 
         Route::get('create',
             [CustomersController::class, 'create'])
-            ->name('customers.create');
+            ->name('customers.create')
+            ->can('add new customer');
 
         Route::post('store',
             [CustomersController::class, 'store'])
-            ->name('customers.store');
+            ->name('customers.store')
+            ->can('add new customer');
 
         Route::get('edit/{id}',
             [CustomersController::class, 'edit'])
-            ->name('customers.edit');
+            ->name('customers.edit')
+            ->can('add new customer');
 
         Route::post('update/{id}',
             [CustomersController::class, 'update'])
-            ->name('customers.update');
+            ->name('customers.update')
+            ->can('add new customer');
 });
