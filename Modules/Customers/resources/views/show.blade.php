@@ -59,10 +59,44 @@
     </div>
 </div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-  </button>
+<div class="row">
+    <div class="card col-12 col-md-3 mr-4">
+        <div class="card-body">
+        <h2 class="card-title mb-2"><strong>Passwords</strong></h2>
+        <p class="card-text">
+            @foreach ($customer->passwords as $password)
+            <p class="password-line"><strong>{{ $password->name }}</strong> <button class="btn btn-light btn-sm password-show"  data-password-id={{ $password->id }}>Show</button> </p>
+            <table class="table table-responsive password-table" data-password-table-id={{ $password->id }} style="display: none;">
+                <tbody>
+                  <tr>
+                    <td><strong>Host</strong></td>
+                    <td class="password-host"></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Login</strong></td>
+                    <td class="password-login"></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Password</strong></td>
+                    <td class="password-password"></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Port</strong></td>
+                    <td class="password-port"></td>
+                  </tr>
+                </tbody>
+              </table>
+            @endforeach
+        </p>
+        @can("add new customer")
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Add new password
+          </button>
+        @endcan
+
+        </div>
+    </div>
+</div>
 
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -212,4 +246,34 @@
   </div>
 
 
+@endsection
+@section('scripts')
+<script>
+        $(document).ready(function() {
+        setTimeout(() => {
+            $('.password-show').on('click', function() {
+            const passwordId = $(this).data('password-id');
+
+            const url = `/passwords/get-password/${passwordId}`;
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    const $passwordTable = $(`.password-table[data-password-table-id="${passwordId}"]`);
+
+                    $passwordTable.find('.password-host').text(data.host);
+                    $passwordTable.find('.password-login').text(data.login);
+                    $passwordTable.find('.password-password').text(data.password);
+                    $passwordTable.find('.password-port').text(data.port);
+
+                    $passwordTable.toggle();
+                }
+            });
+        });
+        }, 500);
+
+    });
+</script>
 @endsection

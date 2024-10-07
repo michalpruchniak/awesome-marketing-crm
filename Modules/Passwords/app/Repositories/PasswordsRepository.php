@@ -9,6 +9,12 @@ use Modules\Passwords\Models\Password;
 
 class PasswordsRepository
 {
+    public function getOne(int $id):Password {
+        $password = Password::findOrFail($id);
+
+        return $password;
+    }
+
     public function store(Request $request):Password {
         $password = Password::create([
             'customer_id' => $request->customer,

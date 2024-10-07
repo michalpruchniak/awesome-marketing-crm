@@ -3,6 +3,7 @@
 namespace Modules\Passwords\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Modules\Passwords\Services\PasswordsService;
@@ -15,6 +16,12 @@ class PasswordsController extends Controller
         PasswordsService $passwordsService
     ) {
         $this->passwordsService = $passwordsService;
+    }
+
+    public function getPassword(int $id):Collection {
+        $password = $this->passwordsService->getDecryptPassword($id);
+
+        return $password;
     }
 
     public function store(Request $request):RedirectResponse
