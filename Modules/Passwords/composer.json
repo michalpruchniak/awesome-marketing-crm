@@ -1,0 +1,30 @@
+{
+    "name": "nwidart/passwords",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [],
+            "aliases": {
+
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Passwords\\": "app/",
+            "Modules\\Passwords\\Database\\Factories\\": "database/factories/",
+            "Modules\\Passwords\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Passwords\\Tests\\": "tests/"
+        }
+    }
+}

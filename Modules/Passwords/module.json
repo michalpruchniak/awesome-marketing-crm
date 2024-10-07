@@ -1,0 +1,11 @@
+{
+    "name": "Passwords",
+    "alias": "passwords",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Passwords\\Providers\\PasswordsServiceProvider"
+    ],
+    "files": []
+}

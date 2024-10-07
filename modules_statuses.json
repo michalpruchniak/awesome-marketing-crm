@@ -2,5 +2,6 @@
     "Users": true,
     "Customers": true,
     "Histories": true,
-    "Sites": true
+    "Sites": true,
+    "Passwords": true
 }
