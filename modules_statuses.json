@@ -1,5 +1,6 @@
 {
     "Users": true,
     "Customers": true,
-    "Histories": true
+    "Histories": true,
+    "Sites": true
 }

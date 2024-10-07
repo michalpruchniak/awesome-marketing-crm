@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Modules\Histories\Models\History;
+use Modules\Sites\Models\Site;
 
 class Customer extends Model
 {
@@ -34,5 +35,9 @@ class Customer extends Model
                     ->orderBy('created_at', 'desc')
                     ->take($limit)
                     ->get();
+    }
+
+    public function sites(){
+        return $this->hasMany(Site::class);
     }
 }
