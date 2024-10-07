@@ -3,6 +3,8 @@
 namespace Modules\Customers\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Customers\Http\Requests\CustomerRequest;
@@ -33,7 +35,7 @@ class CustomersController extends Controller
         $this->users = $this->usersRepository->getAll();
     }
 
-    public function index(Request $request) {
+    public function index(Request $request):View {
         $customers = $this->customersRepository->getAllWithPagination(15, $request);
 
         return view('customers::list')
@@ -43,7 +45,7 @@ class CustomersController extends Controller
                 ->with('customers', $customers);
     }
 
-    public function show($id){
+    public function show($id):View {
         $customer = $this->customersRepository->getOne($id);
 
         return view('customers::show')
@@ -52,14 +54,14 @@ class CustomersController extends Controller
                 ->with('customer', $customer);
     }
 
-    public function create() {
+    public function create():View {
         return view('customers::create')
                 ->with('headerTitle', 'Create new customer')
                 ->with('users', $this->users);
     }
 
 
-    public function store(CustomerRequest $request) {
+    public function store(CustomerRequest $request):RedirectResponse {
         $customer = $this->customersService->createNewCustomer($request);
 
         $message = 'User ' . $customer->user->name . ' was added customer ' . $customer->name;
@@ -68,7 +70,7 @@ class CustomersController extends Controller
         return redirect()->route('customers.show', ['id' => $customer->id]);
     }
 
-    public function edit($id) {
+    public function edit($id):View {
         $customer = $this->customersRepository->getOne($id);
 
         return view('customers::create')
@@ -78,7 +80,7 @@ class CustomersController extends Controller
                 ->with('users', $this->users);
     }
 
-    public function update($id, CustomerRequest $request) {
+    public function update($id, CustomerRequest $request):RedirectResponse {
         $customer = $this->customersService->updateCustomer($id, $request);
 
         $message = 'User ' . $customer->user->name . ' was updated customer ' . $customer->name;
