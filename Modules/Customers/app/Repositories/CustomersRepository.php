@@ -28,12 +28,10 @@ class CustomersRepository {
             $customers->where('active', 1);
         }
 
-
-
         return $customers->paginate($perPage);
     }
 
-    public function storeCustomer(CustomerRequest $request):Customer {
+    public function store(CustomerRequest $request):Customer {
         $customer = Customer::create([
             'name' => $request->name,
             'user_id' => $request->user,
@@ -44,7 +42,7 @@ class CustomersRepository {
         return $customer;
     }
 
-    public function updateCustomer(int $id, CustomerRequest $request):Customer {
+    public function update(int $id, CustomerRequest $request):Customer {
         $customer = $this->getOne($id);
         $customer->name = $request->name;
         $customer->user_id = $request->user;

@@ -27,16 +27,16 @@ use Modules\Customers\Repositories\CustomersRepository;
             return $customers;
         }
 
-        public function createNewCustomer(CustomerRequest $request):Customer {
+        public function store(CustomerRequest $request):Customer {
             $request = $this->checkUser($request);
-            $customer = $this->customersRepository->storeCustomer($request);
+            $customer = $this->customersRepository->store($request);
 
             return $customer;
         }
 
-        public function updateCustomer(int $id, CustomerRequest $request):Customer {
+        public function update(int $id, CustomerRequest $request):Customer {
             $request = $this->checkUser($request);
-            $customer = $this->customersRepository->updateCustomer($id, $request);
+            $customer = $this->customersRepository->update($id, $request);
 
             return $customer;
         }

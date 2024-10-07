@@ -58,7 +58,7 @@ class CustomersController extends Controller
 
 
     public function store(CustomerRequest $request):RedirectResponse {
-        $customer = $this->customersService->createNewCustomer($request);
+        $customer = $this->customersService->store($request);
 
         $message = 'User ' . $customer->user->name . ' was added customer ' . $customer->name;
         $this->historiesService->store(Auth::id(), $customer->id, $message);
@@ -77,7 +77,7 @@ class CustomersController extends Controller
     }
 
     public function update($id, CustomerRequest $request):RedirectResponse {
-        $customer = $this->customersService->updateCustomer($id, $request);
+        $customer = $this->customersService->update($id, $request);
 
         $message = 'User ' . $customer->user->name . ' was updated customer ' . $customer->name;
         $this->historiesService->store(Auth::id(), $customer->id, $message);
