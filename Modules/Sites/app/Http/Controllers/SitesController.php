@@ -3,7 +3,8 @@
 namespace Modules\Sites\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Modules\Sites\Http\Requests\SiteRequest;
 use Modules\Sites\Services\SitesService;
 
 class SitesController extends Controller
@@ -16,7 +17,7 @@ class SitesController extends Controller
         $this->sitesService = $sitesService;
     }
 
-    public function store(Request $request)
+    public function store(SiteRequest $request):RedirectResponse
     {
         $this->sitesService->store($request);
 

@@ -1,6 +1,7 @@
 @extends('layouts.panel')
 @section('content')
 <div class="row">
+    <div class="col-12">
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -10,6 +11,10 @@
         </ul>
     </div>
     @endif
+</div>
+</div>
+<div class="row">
+
     <div class="card col-12 col-md-3 mr-4">
         <div class="card-body">
         <h2 class="card-title mb-2"><strong>Details</strong></h2>
