@@ -36,13 +36,29 @@
                 <option
                     value=
                     {{ $user->id }}
-                    @if(Auth::id() === $user->id)
-                    selected
+                    @if(isset($customer) && $customer->user_id === $user->id)
+                        selected
+                    @elseif(Auth::id() === $user->id)
+                        selected
+                    @elseif(old('user') === $user->id)
+                        selected
                     @endif>
                     {{ $user->name }}
                     </option>
             @endforeach
             </select>
+        </div>
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" value="1" id="lead" name="lead" @if(isset($customer) && $customer->load === 1) checked @elseif (empty($customer)) checked @else {{ old('lead') }} @endif>
+            <label class="form-check-label" for="lead">
+              Lead
+            </label>
+        </div>
+        <div class="form-check mb-2">
+            <input class="form-check-input" type="checkbox" value="1" id="active" name="active" @if(isset($customer) && $customer->active === 1) checked @elseif (empty($customer)) checked @else {{ old('active') }} @endif>
+            <label class="form-check-label" for="active">
+              Active
+            </label>
         </div>
       @endcan
     <button type="submit" class="btn btn-primary">Submit</button>

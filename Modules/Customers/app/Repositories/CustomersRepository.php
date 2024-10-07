@@ -30,7 +30,9 @@ class CustomersRepository {
     public function storeCustomer(CustomerRequest $request):Customer {
         $customer = Customer::create([
             'name' => $request->name,
-            'user_id' => $request->user
+            'user_id' => $request->user,
+            'lead' => $request->lead,
+            'active' => $request->active
         ]);
 
         return $customer;

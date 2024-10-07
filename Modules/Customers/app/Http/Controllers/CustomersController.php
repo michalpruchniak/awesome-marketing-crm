@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Modules\Customers\Http\Requests\CustomerRequest;
 use Modules\Customers\Services\CustomersService;
 use Modules\Histories\Services\HistoriesService;
-use Modules\Users\Repositories\UsersRepository;
 use Modules\Users\Services\UsersService;
 
 class CustomersController extends Controller

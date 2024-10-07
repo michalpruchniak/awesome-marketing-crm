@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('name');
+            $table->boolean('lead')->nullable()->default(0);
+            $table->boolean('active')->nullable()->default(1);
             $table->timestamps();
         });
     }
