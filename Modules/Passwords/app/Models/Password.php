@@ -4,7 +4,7 @@ namespace Modules\Passwords\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Modules\Passwords\Database\Factories\PasswordFactory;
+use Modules\Passwords\Enums\PasswordType;
 
 class Password extends Model
 {
@@ -13,10 +13,18 @@ class Password extends Model
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'customer_id',
+        'name',
+        'type',
+        'host',
+        'login',
+        'password',
+        'port',
+        'notes'
+    ];
 
-    // protected static function newFactory(): PasswordFactory
-    // {
-    //     // return PasswordFactory::new();
-    // }
+    protected $casts = [
+        'type' => PasswordType::class,
+    ];
 }

@@ -14,6 +14,11 @@ use Modules\Passwords\Http\Controllers\PasswordsController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('passwords', PasswordsController::class)->names('passwords');
+Route::prefix('passwords')
+     ->middleware('auth')
+     ->group(function () {
+
+        Route::post('store',
+            [PasswordsController::class, 'store'])
+            ->name('passwords.store');
 });

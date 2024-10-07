@@ -3,7 +3,6 @@
 namespace Modules\Sites\Services;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Histories\Services\HistoriesService;
 use Modules\Sites\Http\Requests\SiteRequest;

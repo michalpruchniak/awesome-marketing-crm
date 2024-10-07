@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('passwords', function (Blueprint $table) {
             $table->id();
-            
+            $table->integer('customer_id');
+            $table->string('name');
+            $table->integer('type');
+            $table->string('host');
+            $table->string('login');
+            $table->string('password');
+            $table->integer('port')->nullable();
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }
