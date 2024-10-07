@@ -13,7 +13,7 @@ class SiteRequest extends FormRequest
     {
         return [
             'customer' => 'required|exists:customers,id',
-            'url' => 'required|regex:/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/'
+            'url' => 'required|regex:/^(https?:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/'
         ];
     }
 
