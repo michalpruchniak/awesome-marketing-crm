@@ -52,12 +52,25 @@
     <div class="card col-12 col-md-5 mr-4">
         <div class="card-body">
         <h2 class="card-title mb-2"><strong>Passwords</strong></h2>
-        <div class="mb-2" style="width: 100%; max-height: 165px; overflow-y: auto;">
+        <div class="mb-2" style="width: 100%; max-height: 230px; overflow-y: auto;">
             @can("got password")
 
             @foreach ($customer->passwords as $password)
-            <p class="password-line"><strong>{{ $password->name }}</strong> <button class="btn btn-light btn-sm password-show"  data-password-id={{ $password->id }}>Show</button> </p>
+            <p class="password-line pb-0 mb-0">
+                @switch($password->type->value)
+                @case(3)
+                    <i class="fa-solid fa-earth-americas"></i>
+                    @break
 
+                @case(2)
+                    <i class="fa-solid fa-lock"></i>
+                    @break
+
+                @default
+                    <i class="fa-solid fa-question-circle"></i>
+            @endswitch
+                <strong>{{ $password->name }}</strong> <button class="btn btn-light btn-sm password-show"  data-password-id={{ $password->id }}>Show</button> </p>
+                <p>{{ $password->notes }}</p>
             <table class="table table-responsive password-table" data-password-table-id={{ $password->id }} style="display: none;">
                 <tbody>
                   <tr>
@@ -94,8 +107,8 @@
     <div class="card col-12 col-md-6">
         <div class="card-body">
         <h2 class="card-title mb-2"><strong>History</strong></h2>
-        <div class="mb-2" style="width: 100%; max-height: 165px; overflow-y: auto;">
-            @foreach ($customer->latestHistories(5) as $history)
+        <div class="mb-2" style="width: 100%; max-height: 230px; overflow-y: auto;">
+            @foreach ($customer->latestHistories(15) as $history)
                 <p class="card-text">{{ $history->message }}</p>
             @endforeach
         </div>
@@ -254,35 +267,39 @@
 
 @endsection
 @section('scripts')
+@can("got password")
+
 <script>
-        $(document).ready(function() {
-            setTimeout(() => {
-    $('.password-show').on('click', function() {
-        const passwordId = $(this).data('password-id');
-        const $passwordTable = $(`.password-table[data-password-table-id="${passwordId}"]`);
+$(document).ready(function() {
+    setTimeout(() => {
+        $('.password-show').on('click', function() {
+            const passwordId = $(this).data('password-id');
+            const $passwordTable = $(`.password-table[data-password-table-id="${passwordId}"]`);
 
-        if (!$passwordTable.hasClass('got-pass')) {
-            const url = `/passwords/get-password/${passwordId}`;
+            if (!$passwordTable.hasClass('got-pass')) {
+                const url = `/passwords/get-password/${passwordId}`;
 
-            $.ajax({
-                url: url,
-                type: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    $passwordTable.find('.password-host').text(data.host);
-                    $passwordTable.find('.password-login').text(data.login);
-                    $passwordTable.find('.password-password').text(data.password);
-                    $passwordTable.find('.password-port').text(data.port);
+                $.ajax({
+                    url: url,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        $passwordTable.find('.password-host').text(data.host);
+                        $passwordTable.find('.password-login').text(data.login);
+                        $passwordTable.find('.password-password').text(data.password);
+                        $passwordTable.find('.password-port').text(data.port);
 
-                    $passwordTable.addClass('got-pass');
-                }
-            });
-        }
+                        $passwordTable.addClass('got-pass');
+                    }
+                });
+            }
 
-        $passwordTable.toggle();
-    });
-}, 500);
+            $passwordTable.toggle();
+        });
+    }, 500);
 
-    });
+});
 </script>
+@endcan
+
 @endsection

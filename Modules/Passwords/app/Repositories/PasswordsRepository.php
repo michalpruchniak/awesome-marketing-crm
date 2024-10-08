@@ -24,7 +24,8 @@ class PasswordsRepository
             'host' => $request->host,
             'login' => Crypt::encrypt($request->login),
             'password' => Crypt::encrypt($request->password),
-            'notest' => $request->notes
+            'port' => $request->port,
+            'notes' => $request->notes
         ]);
 
         return $password;
