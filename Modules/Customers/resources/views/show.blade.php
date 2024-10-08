@@ -52,9 +52,12 @@
     <div class="card col-12 col-md-5 mr-4">
         <div class="card-body">
         <h2 class="card-title mb-2"><strong>Passwords</strong></h2>
-        <p class="card-text">
+        <div class="mb-2" style="width: 100%; max-height: 165px; overflow-y: auto;">
+            @can("got password")
+
             @foreach ($customer->passwords as $password)
             <p class="password-line"><strong>{{ $password->name }}</strong> <button class="btn btn-light btn-sm password-show"  data-password-id={{ $password->id }}>Show</button> </p>
+
             <table class="table table-responsive password-table" data-password-table-id={{ $password->id }} style="display: none;">
                 <tbody>
                   <tr>
@@ -76,8 +79,11 @@
                 </tbody>
               </table>
             @endforeach
-        </p>
-        @can("add new customer")
+            @else
+            <p>You don't have permission to get passwords.</p>
+            @endcan
+        </div>
+        @can("add new password")
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Add new password
           </button>

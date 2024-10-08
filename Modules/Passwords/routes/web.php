@@ -20,10 +20,11 @@ Route::prefix('passwords')
 
         Route::post('store',
             [PasswordsController::class, 'store'])
-            ->name('passwords.store');
+            ->name('passwords.store')
+            ->can('add new password');
 
         Route::get('get-password/{id}',
             [PasswordsController::class, 'getPassword'])
-            ->name('passwords.get-password');
+            ->name('got password');
 
 });

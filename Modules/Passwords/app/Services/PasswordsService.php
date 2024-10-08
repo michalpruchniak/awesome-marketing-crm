@@ -34,13 +34,16 @@ class PasswordsService
             'password' => Crypt::decrypt($password->password),
         ]);
 
-        $this->historiesService->store(Auth::id(), $password->customer_id, Auth::user()->name . " user got password " .$password->name. " customer " . $password->customer->name);
+        $this->historiesService->store(Auth::id(), $password->customer_id, Auth::user()->name . " user got password " . $password->name . " customer " . $password->customer->name);
+
         return $passwordCollection;
     }
 
     public function store(PasswordRequest $request):Password {
-        $passwords = $this->passwordsRepository->store($request);
+        $password = $this->passwordsRepository->store($request);
 
-        return $passwords;
+        $this->historiesService->store(Auth::id(), $password->customer_id, "The password " . $password->name . " was added by " . Auth::user()->name);
+
+        return $password;
     }
 }
