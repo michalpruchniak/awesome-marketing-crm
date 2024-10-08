@@ -250,10 +250,12 @@
 @section('scripts')
 <script>
         $(document).ready(function() {
-        setTimeout(() => {
-            $('.password-show').on('click', function() {
-            const passwordId = $(this).data('password-id');
+            setTimeout(() => {
+    $('.password-show').on('click', function() {
+        const passwordId = $(this).data('password-id');
+        const $passwordTable = $(`.password-table[data-password-table-id="${passwordId}"]`);
 
+        if (!$passwordTable.hasClass('got-pass')) {
             const url = `/passwords/get-password/${passwordId}`;
 
             $.ajax({
@@ -261,18 +263,19 @@
                 type: 'GET',
                 dataType: 'json',
                 success: function(data) {
-                    const $passwordTable = $(`.password-table[data-password-table-id="${passwordId}"]`);
-
                     $passwordTable.find('.password-host').text(data.host);
                     $passwordTable.find('.password-login').text(data.login);
                     $passwordTable.find('.password-password').text(data.password);
                     $passwordTable.find('.password-port').text(data.port);
 
-                    $passwordTable.toggle();
+                    $passwordTable.addClass('got-pass');
                 }
             });
-        });
-        }, 500);
+        }
+
+        $passwordTable.toggle();
+    });
+}, 500);
 
     });
 </script>
