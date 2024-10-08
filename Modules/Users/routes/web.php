@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Users\Http\Controllers\UsersController;
+use Modules\Users\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +14,14 @@ use Modules\Users\Http\Controllers\UsersController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('users', UsersController::class)->names('users');
-});
+Route::get('/login',
+    [AuthController::class, 'login'])
+    ->name("login");
+
+Route::post('/login',
+    [AuthController::class, 'store'])
+    ->name("login");
+
+Route::post('/logout',
+    [AuthController::class, 'destroy'])
+    ->name("logout");
