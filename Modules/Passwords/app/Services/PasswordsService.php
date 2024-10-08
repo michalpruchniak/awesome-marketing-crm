@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Modules\Histories\Services\HistoriesService;
+use Modules\Passwords\Http\Requests\PasswordRequest;
 use Modules\Passwords\Models\Password;
 use Modules\Passwords\Repositories\PasswordsRepository;
 
@@ -37,7 +38,7 @@ class PasswordsService
         return $passwordCollection;
     }
 
-    public function store(Request $request):Password {
+    public function store(PasswordRequest $request):Password {
         $passwords = $this->passwordsRepository->store($request);
 
         return $passwords;

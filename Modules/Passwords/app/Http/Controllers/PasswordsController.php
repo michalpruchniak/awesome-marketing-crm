@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Modules\Passwords\Http\Requests\PasswordRequest;
 use Modules\Passwords\Services\PasswordsService;
 
 class PasswordsController extends Controller
@@ -24,7 +25,7 @@ class PasswordsController extends Controller
         return $password;
     }
 
-    public function store(Request $request):RedirectResponse
+    public function store(PasswordRequest $request):RedirectResponse
     {
         $this->passwordsService->store($request);
 

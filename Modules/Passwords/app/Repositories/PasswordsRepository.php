@@ -4,6 +4,7 @@ namespace Modules\Passwords\Repositories;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Modules\Passwords\Http\Requests\PasswordRequest;
 use Modules\Passwords\Models\Password;
 
 
@@ -15,7 +16,7 @@ class PasswordsRepository
         return $password;
     }
 
-    public function store(Request $request):Password {
+    public function store(PasswordRequest $request):Password {
         $password = Password::create([
             'customer_id' => $request->customer,
             'name' => $request->name,
