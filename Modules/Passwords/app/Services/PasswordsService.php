@@ -33,7 +33,7 @@ class PasswordsService
             'password' => Crypt::decrypt($password->password),
         ]);
 
-        $this->historiesService->store(Auth::id(), $id, "User " . Auth::user()->username . ' got the password ' . $password->name . ' of the customer ' . $password->customer->name);
+        $this->historiesService->store(Auth::id(), $password->customer_id, Auth::user()->name . " user got password " .$password->name. " customer " . $password->customer->name);
         return $passwordCollection;
     }
 
