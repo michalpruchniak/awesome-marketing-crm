@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Users\Http\Controllers\AuthController;
+use Modules\Users\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,13 @@ Route::post('/login',
 Route::post('/logout',
     [AuthController::class, 'destroy'])
     ->name("logout");
+
+Route::prefix('users')
+    ->middleware('auth')
+    ->group(function () {
+
+       Route::get('list',
+           [UsersController::class, 'index'])
+           ->name('users.list');
+});
+

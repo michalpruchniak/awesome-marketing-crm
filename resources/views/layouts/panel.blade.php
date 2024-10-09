@@ -68,6 +68,26 @@
                 </li>
             </ul>
           </li>
+          <li class="nav-item menu-is-opening">
+            <a href="#" class="nav-link">
+                <i class="fa-solid fa-users"></i>
+                <p>Users <i class="right fas fa-angle-left"></i></p>
+            </a>
+            <ul class="nav nav-treeview">
+                @can('add user to customer')
+                <li class="nav-item">
+                    <a href="{{ route('customers.create') }}" class="nav-link">
+                        <p>Create</p>
+                    </a>
+                </li>
+                @endcan
+                <li class="nav-item">
+                    <a href="{{ route('users.list') }}" class="nav-link">
+                        <p>List</p>
+                    </a>
+                </li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>
