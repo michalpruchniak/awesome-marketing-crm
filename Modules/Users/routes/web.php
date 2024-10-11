@@ -34,5 +34,21 @@ Route::prefix('users')
        Route::get('list',
            [UsersController::class, 'index'])
            ->name('users.list');
+
+       Route::get('create',
+           [UsersController::class, 'create'])
+           ->name('users.create');
+
+       Route::post('store',
+           [UsersController::class, 'store'])
+           ->name('users.store');
+
+        Route::get('edit/{id}',
+           [UsersController::class, 'edit'])
+           ->name('users.edit');
+
+        Route::post('update/{id}',
+           [UsersController::class, 'update'])
+           ->name('users.update');
 });
 
