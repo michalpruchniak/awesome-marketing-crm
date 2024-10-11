@@ -52,8 +52,8 @@ class UsersController extends Controller
             ->with('roles', $this->usersService->getAllRoles());
     }
 
-    public function update(Request $request) {
-        $this->usersService->store($request);
+    public function update(int $id, Request $request) {
+        $this->usersService->update($id, $request);
 
         return redirect()->route('users.list');
     }

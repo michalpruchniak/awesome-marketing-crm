@@ -39,6 +39,12 @@ class UsersService
         return $user;
     }
 
+    public function update(int $id, Request $request):User {
+        $user = $this->usersRepository->update($id, $request);
+
+        return $user;
+    }
+
     public function getAllRoles() {
         $roles = $this->usersRepository->getAllRoles();
 

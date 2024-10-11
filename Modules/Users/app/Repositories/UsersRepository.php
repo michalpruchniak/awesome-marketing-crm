@@ -31,6 +31,20 @@ class UsersRepository {
         return $user;
     }
 
+    public function update(int $id, Request $request):User {
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if(isset($request->password)){
+            $user->password = Hash::make($request->password);
+        }
+        $user->save();
+
+        $this->assingRole($request->role, $user);
+
+        return $user;
+    }
+
     public function getAllRoles() {
         $roles = Role::all();
 
