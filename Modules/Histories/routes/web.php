@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Histories\Http\Controllers\HistoriesController;
+use Modules\Users\Http\Middleware\ActiveUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,10 +16,10 @@ use Modules\Histories\Http\Controllers\HistoriesController;
 */
 
 Route::prefix('histories')
-     ->middleware('auth')
+     ->middleware(['auth', ActiveUser::class])
      ->group(function () {
+
         Route::get('show/{id}',
             [HistoriesController::class, 'show'])
             ->name('histories.show');
-
 });

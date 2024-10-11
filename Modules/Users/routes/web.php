@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Users\Http\Controllers\AuthController;
 use Modules\Users\Http\Controllers\UsersController;
+use Modules\Users\Http\Middleware\ActiveUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ Route::post('/logout',
     ->name("logout");
 
 Route::prefix('users')
-    ->middleware('auth')
+    ->middleware(['auth', ActiveUser::class])
     ->group(function () {
 
        Route::get('list',

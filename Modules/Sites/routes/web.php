@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Sites\Http\Controllers\SitesController;
+use Modules\Users\Http\Middleware\ActiveUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,7 @@ use Modules\Sites\Http\Controllers\SitesController;
 */
 
 Route::prefix('sites')
-     ->middleware('auth')
+     ->middleware(['auth', ActiveUser::class])
      ->group(function () {
 
         Route::post('store',

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Passwords\Http\Controllers\PasswordsController;
+use Modules\Users\Http\Middleware\ActiveUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,7 @@ use Modules\Passwords\Http\Controllers\PasswordsController;
 */
 
 Route::prefix('passwords')
-     ->middleware('auth')
+     ->middleware(['auth', ActiveUser::class])
      ->group(function () {
 
         Route::post('store',

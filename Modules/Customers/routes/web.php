@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Customers\Http\Controllers\CustomersController;
+use Modules\Users\Http\Middleware\ActiveUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,9 @@ use Modules\Customers\Http\Controllers\CustomersController;
 */
 
 Route::prefix('customers')
-     ->middleware('auth')
+     ->middleware(['auth', ActiveUser::class])
      ->group(function () {
+
         Route::get('',
             [CustomersController::class, 'index'])
             ->name('customers.list');
