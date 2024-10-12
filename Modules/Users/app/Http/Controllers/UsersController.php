@@ -24,15 +24,15 @@ class UsersController extends Controller
 
     public function index():View {
         return view('users::list')
-            ->with('mainTitle', 'List of customers')
-            ->with('headerTitle', 'List of customers')
+            ->with('mainTitle', 'List of Users')
+            ->with('headerTitle', 'List of Users')
             ->with('users', $this->users->getAll());
     }
 
     public function create() {
         return view('users::create')
-            ->with('mainTitle', 'List of customers')
-            ->with('headerTitle', 'List of customers')
+            ->with('mainTitle', 'Create new user')
+            ->with('headerTitle', 'Create new user')
             ->with('roles', $this->usersService->getAllRoles());
     }
 
@@ -52,7 +52,7 @@ class UsersController extends Controller
             ->with('roles', $this->usersService->getAllRoles());
     }
 
-    public function update(int $id, Request $request) {
+    public function update(Request $request, int $id) {
         $this->usersService->update($id, $request);
 
         return redirect()->route('users.list');

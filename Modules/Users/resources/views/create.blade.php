@@ -1,7 +1,10 @@
 @extends('layouts.panel')
 @section('content')
-<form action=@if(isset($user)) {{ route('users.update', ['id' => $user->id]) }} @else {{ route('users.store') }} @endif method="post">
+<form action=@if(isset($user)) {{ route('users.update', ['id' => $user->id]) }} @else {{ route('users.store') }} @endif method="POST">
     @csrf
+    @if(isset($user))
+        @method('PATCH')
+    @endif
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>

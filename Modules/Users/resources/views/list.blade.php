@@ -7,7 +7,7 @@
         <th scope="col">Name</th>
         <th scope="col">Role</th>
         <th scope="col">Edit</th>
-        <th scope="col">Delete</th>
+        <th scope="col">Ban</th>
       </tr>
     </thead>
     <tbody>
@@ -23,7 +23,7 @@
                 </ul>
 
             </td>
-            <td><a href="#" class="btn btn-primary">Edit</a></td>
+            <td><a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-primary">Edit</a></td>
             <td><a href="#" class="btn btn-danger">Delete</a></td>
           </tr>
         @endforeach

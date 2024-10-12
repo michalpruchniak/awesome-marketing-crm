@@ -48,7 +48,7 @@ Route::prefix('users')
            [UsersController::class, 'edit'])
            ->name('users.edit');
 
-        Route::post('update/{id}',
+        Route::patch('update/{id}',
            [UsersController::class, 'update'])
            ->name('users.update');
 });
