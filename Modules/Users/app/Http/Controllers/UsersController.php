@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Modules\Users\Http\Requests\UserStoreRequest;
+use Modules\Users\Http\Requests\UserUpdateRequest;
 use Modules\Users\Repositories\UsersRepository;
 use Modules\Users\Services\UsersService;
 use Spatie\Permission\Models\Role;
@@ -37,7 +39,7 @@ class UsersController extends Controller
             ->with('roles', $this->usersService->getAllRoles());
     }
 
-    public function store(Request $request):RedirectResponse {
+    public function store(UserStoreRequest $request):RedirectResponse {
         $this->usersService->store($request);
 
         return redirect()->route('users.list');
@@ -53,7 +55,7 @@ class UsersController extends Controller
             ->with('roles', $this->usersService->getAllRoles());
     }
 
-    public function update(Request $request, int $id):RedirectResponse {
+    public function update(UserUpdateRequest $request, int $id):RedirectResponse {
         $this->usersService->update($id, $request);
 
         return redirect()->route('users.list');

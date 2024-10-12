@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Modules\Users\Http\Requests\UserStoreRequest;
+use Modules\Users\Http\Requests\UserUpdateRequest;
 use Modules\Users\Repositories\UsersRepository;
 
 class UsersService
@@ -31,7 +33,7 @@ class UsersService
         return $users;
     }
 
-    public function store(Request $request):User {
+    public function store(UserStoreRequest $request):User {
         $user = $this->usersRepository->store($request);
 
         $this->usersRepository->assingRole($request->role, $user);
@@ -39,8 +41,8 @@ class UsersService
         return $user;
     }
 
-    public function update(int $id, Request $request):User {
-        $user = $this->usersRepository->update($id, $request);
+    public function update(int $id, UserUpdateRequest $request):User {
+        $user = $this->usersRepository->update($request, $id);
 
         return $user;
     }

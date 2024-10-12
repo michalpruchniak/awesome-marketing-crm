@@ -3,8 +3,9 @@ namespace Modules\Users\Repositories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Modules\Users\Http\Requests\UserStoreRequest;
+use Modules\Users\Http\Requests\UserUpdateRequest;
 use Spatie\Permission\Models\Role;
 
 class UsersRepository {
@@ -21,7 +22,7 @@ class UsersRepository {
         return $users;
     }
 
-    public function store(Request $request):User {
+    public function store(UserStoreRequest $request):User {
         $user = User::create([
             'name' => $request->name,
             'email' => $request->name,
@@ -31,13 +32,14 @@ class UsersRepository {
         return $user;
     }
 
-    public function update(int $id, Request $request):User {
+    public function update(UserUpdateRequest $request, int $id):User {
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->email = $request->email;
         if(isset($request->password)){
             $user->password = Hash::make($request->password);
         }
+
         $user->save();
 
         $this->assingRole($request->role, $user);
