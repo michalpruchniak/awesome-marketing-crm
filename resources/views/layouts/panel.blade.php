@@ -76,7 +76,7 @@
             <ul class="nav nav-treeview">
                 @can('add user to customer')
                 <li class="nav-item">
-                    <a href="{{ route('customers.create') }}" class="nav-link">
+                    <a href="{{ route('users.create') }}" class="nav-link">
                         <p>Create</p>
                     </a>
                 </li>
