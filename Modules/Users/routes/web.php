@@ -34,30 +34,37 @@ Route::prefix('users')
 
        Route::get('list',
            [UsersController::class, 'index'])
+           ->can('manage users')
            ->name('users.list');
 
        Route::get('create',
            [UsersController::class, 'create'])
+           ->can('manage users')
            ->name('users.create');
 
        Route::post('store',
            [UsersController::class, 'store'])
+           ->can('manage users')
            ->name('users.store');
 
         Route::get('edit/{id}',
            [UsersController::class, 'edit'])
+           ->can('manage users')
            ->name('users.edit');
 
         Route::patch('update/{id}',
            [UsersController::class, 'update'])
+           ->can('manage users')
            ->name('users.update');
 
         Route::delete('delete/{id}',
            [UsersController::class, 'destroy'])
+           ->can('manage users')
            ->name('users.destroy');
 
         Route::get('delete-ban/{id}',
            [UsersController::class, 'deleteBan'])
+           ->can('manage users')
            ->name('users.deleteBan');
 });
 

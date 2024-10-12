@@ -68,19 +68,18 @@
                 </li>
             </ul>
           </li>
+          @can('manage users')
           <li class="nav-item menu-is-opening">
             <a href="#" class="nav-link">
                 <i class="fa-solid fa-users"></i>
                 <p>Users <i class="right fas fa-angle-left"></i></p>
             </a>
             <ul class="nav nav-treeview">
-                @can('add user to customer')
                 <li class="nav-item">
                     <a href="{{ route('users.create') }}" class="nav-link">
                         <p>Create</p>
                     </a>
                 </li>
-                @endcan
                 <li class="nav-item">
                     <a href="{{ route('users.list') }}" class="nav-link">
                         <p>List</p>
@@ -88,6 +87,8 @@
                 </li>
             </ul>
           </li>
+          @endcan
+
         </ul>
       </nav>
     </div>
