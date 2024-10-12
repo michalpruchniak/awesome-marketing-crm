@@ -56,4 +56,22 @@ class UsersRepository {
 
         return $user;
     }
+
+    public function destroy(int $id):User {
+        $user = User::findOrFail($id);
+
+        $user->ban = 1;
+        $user->save();
+
+        return $user;
+    }
+
+    public function deleteBan(int $id):User {
+        $user = User::findOrFail($id);
+
+        $user->ban = 0;
+        $user->save();
+
+        return $user;
+    }
 }

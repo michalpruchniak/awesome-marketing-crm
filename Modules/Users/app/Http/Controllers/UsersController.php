@@ -57,4 +57,22 @@ class UsersController extends Controller
 
         return redirect()->route('users.list');
     }
+
+    public function destroy(int $id) {
+       $destroy = $this->usersService->destroy($id);
+
+       if($destroy){
+            $redirect = redirect()->back();
+       } else {
+            $redirect = redirect()->back()->withErrors(['You can\'t give a ban to yourself']);
+       }
+
+       return $redirect;
+    }
+
+    public function deleteBan(int $id) {
+        $this->usersService->deleteBan($id);
+
+        return redirect()->back();
+    }
 }

@@ -5,8 +5,11 @@ namespace Modules\Users\Services;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Modules\Users\Repositories\UsersRepository;
+use phpDocumentor\Reflection\Types\Boolean;
+use Spatie\Permission\Models\Role;
 
 class UsersService
 {
@@ -19,7 +22,7 @@ class UsersService
         $this->usersRepository = $usersRepository;
     }
 
-    public function getOne(int $id) {
+    public function getOne(int $id):User {
         $user = $this->usersRepository->getOne($id);
 
         return $user;
@@ -49,5 +52,22 @@ class UsersService
         $roles = $this->usersRepository->getAllRoles();
 
         return $roles;
+    }
+
+    public function destroy(int $id):Bool {
+        if(Auth::id() !== $id) {
+            $this->usersRepository->destroy($id);
+            $flag = true;
+        } else {
+            $flag = false;
+        }
+
+        return $flag;
+    }
+
+    public function deleteBan(int $id):Bool {
+        $this->usersRepository->deleteBan($id);
+
+        return true;
     }
 }

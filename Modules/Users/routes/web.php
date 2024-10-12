@@ -51,5 +51,13 @@ Route::prefix('users')
         Route::patch('update/{id}',
            [UsersController::class, 'update'])
            ->name('users.update');
+
+        Route::delete('delete/{id}',
+           [UsersController::class, 'destroy'])
+           ->name('users.destroy');
+
+        Route::get('delete-ban/{id}',
+           [UsersController::class, 'deleteBan'])
+           ->name('users.deleteBan');
 });
 
