@@ -45,7 +45,7 @@ class UsersRepository {
         return $user;
     }
 
-    public function getAllRoles() {
+    public function getAllRoles():Collection {
         $roles = Role::all();
 
         return $roles;

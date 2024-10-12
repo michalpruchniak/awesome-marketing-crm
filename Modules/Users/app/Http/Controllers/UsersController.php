@@ -4,6 +4,7 @@ namespace Modules\Users\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Modules\Users\Repositories\UsersRepository;
 use Modules\Users\Services\UsersService;
@@ -29,20 +30,20 @@ class UsersController extends Controller
             ->with('users', $this->users->getAll());
     }
 
-    public function create() {
+    public function create():View {
         return view('users::create')
             ->with('mainTitle', 'Create new user')
             ->with('headerTitle', 'Create new user')
             ->with('roles', $this->usersService->getAllRoles());
     }
 
-    public function store(Request $request) {
+    public function store(Request $request):RedirectResponse {
         $this->usersService->store($request);
 
         return redirect()->route('users.list');
     }
 
-    public function edit(int $id) {
+    public function edit(int $id):View {
         $user = $this->usersService->getOne($id);
 
         return view('users::create')
@@ -52,13 +53,13 @@ class UsersController extends Controller
             ->with('roles', $this->usersService->getAllRoles());
     }
 
-    public function update(Request $request, int $id) {
+    public function update(Request $request, int $id):RedirectResponse {
         $this->usersService->update($id, $request);
 
         return redirect()->route('users.list');
     }
 
-    public function destroy(int $id) {
+    public function destroy(int $id):RedirectResponse {
        $destroy = $this->usersService->destroy($id);
 
        if($destroy){
@@ -70,7 +71,7 @@ class UsersController extends Controller
        return $redirect;
     }
 
-    public function deleteBan(int $id) {
+    public function deleteBan(int $id):RedirectResponse {
         $this->usersService->deleteBan($id);
 
         return redirect()->back();
