@@ -8,13 +8,13 @@ Follow the steps below to set up the project:
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/username/repository-name.git
+    git clone https://github.com/michalpruchniak/awesome-marketing-crm.git
     ```
 
 2. **Navigate to the project directory:**
 
     ```bash
-    cd repository-name
+    cd awesome-marketing-crm
     ```
 
 3. **Install PHP dependencies:**
