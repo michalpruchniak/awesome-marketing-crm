@@ -115,6 +115,16 @@
         <a href="{{ route('histories.show', ['id' => $customer->id]) }}" class="btn btn-primary">Show all</a>
         </div>
     </div>
+    <div class="card col-12">
+        <div class="card-body">
+        <h2 class="card-title mb-2"><strong>Activities</strong></h2>
+        <div class="mb-2" style="width: 100%; max-height: 350px; overflow-y: auto;">
+        </div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addActivity">
+            Add Activity
+          </button>
+        </div>
+    </div>
 </div>
 
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -222,7 +232,66 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="addActivity" tabindex="-1" role="dialog" aria-labelledby="addActivityLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addActivityLabel">Add activity</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form method="post" action={{ route('activity.store') }}>
+                @csrf
+                <input
+                type="hidden"
+                name="customer"
+                class="form-control"
+                id="customer"
+                value="{{ $customer->id }}"
+                />
+            <label
+                for="url"
+            >Type</label>
+            <div class="form-group">
+                <select
+                name="type"
+                class="form-control"
+                id="customer"
+                >
+                <option value="1">Technical problem solving</option>
+                </select>
+        </div>
+            <label
+                for="description"
+            >Description</label>
+            <div class="form-group">
+                <textarea
+                id="description"
+                name="description"
+                class="form-control"
+                ></textarea>
+            </div>
+            <label
+                for="description"
+            >Duration</label>
+            <div class="form-group">
+                <label for='durationh'>h</label>
+                <input id='durationh' name='durationh' type='number' min='0' max='23' class="form-control" style="max-width: 100px; display: inline-block; margin-right: 10px;" value=0>
 
+                <label for='durationm'>m</label>
+                <input id='durationm' name='durationm' type='number' min='0' max='59' class="form-control" style="max-width: 100px; display: inline-block;" value=0>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+      </div>
+    </div>
+  </div>
   <div class="modal fade" id="newSiteModal" tabindex="-1" role="dialog" aria-labelledby="newSiteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -263,7 +332,6 @@
       </div>
     </div>
   </div>
-
 
 @endsection
 @section('scripts')

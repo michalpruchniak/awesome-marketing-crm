@@ -3,5 +3,6 @@
     "Customers": true,
     "Histories": true,
     "Sites": true,
-    "Passwords": true
+    "Passwords": true,
+    "Activities": true
 }
