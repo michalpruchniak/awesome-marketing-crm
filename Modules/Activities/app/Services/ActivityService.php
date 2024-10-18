@@ -2,7 +2,9 @@
 
 namespace Modules\Activities\Services;
 
+use App\Enums\OrderByType;
 use Illuminate\Http\Request;
+use Modules\Activities\DTO\GetAllActivitiesArgsDTO;
 use Modules\Activities\Repositories\ActivityRepository;
 
 class ActivityService
@@ -26,5 +28,11 @@ class ActivityService
         ]);
 
         $this->activityRepository->store($request);
+    }
+
+    public function getForCustomerPage(int $id) {
+        $args = new GetAllActivitiesArgsDTO(customerId: $id, limit: 45, orderBy:OrderByType::DESC);
+
+        return $this->activityRepository->getAll($args);
     }
 }

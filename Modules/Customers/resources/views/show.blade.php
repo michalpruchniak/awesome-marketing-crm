@@ -119,7 +119,30 @@
         <div class="card-body">
         <h2 class="card-title mb-2"><strong>Activities</strong></h2>
         <div class="mb-2" style="width: 100%; max-height: 350px; overflow-y: auto;">
+            <table class="table w-100">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>Duration</th>
+                        <th>Added</th>
+                        <th>User</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($activities as $activity)
+                        <tr>
+                            <td>Solve technical problem</td>
+                            <td>{{ $activity->description }}</td>
+                            <td>{{ \Carbon\CarbonInterval::minutes($activity->duration)->cascade()->forHumans(['short' => true]) }}</td>
+                            <td>{{ \Carbon\Carbon::parse($activity->created_at)->diffForHumans() }}</td>
+                            <td>{{ $activity->user->name }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addActivity">
             Add Activity
           </button>

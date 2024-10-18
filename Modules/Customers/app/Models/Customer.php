@@ -5,6 +5,7 @@ namespace Modules\Customers\Models;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\Activities\Models\Activity;
 use Modules\Histories\Models\History;
 use Modules\Passwords\Models\Password;
 use Modules\Sites\Models\Site;
@@ -44,5 +45,9 @@ class Customer extends Model
 
     public function passwords() {
         return $this->hasMany(Password::class);
+    }
+
+    public function activities() {
+        return $this->belongsToMany(Activity::class);
     }
 }
