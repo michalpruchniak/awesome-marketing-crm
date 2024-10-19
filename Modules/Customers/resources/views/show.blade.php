@@ -152,7 +152,47 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="newSiteModal" tabindex="-1" role="dialog" aria-labelledby="newSiteModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newSiteModalLabel">Add new site</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form method="post" action={{ route('sites.store') }}>
+                @csrf
+                <input
+                type="hidden"
+                name="customer"
+                class="form-control"
+                id="customer"
+                value="{{ $customer->id }}"
+                />
+            <label
+                for="url"
+            >Url address</label>
+            <div class="form-group">
+                <input
+                type="string"
+                name="url"
+                class="form-control"
+                id="url"
+                placeholder="Url address"
+                />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit"class="btn btn-primary">Add</button>
+        </div>
+        </form>
 
+      </div>
+    </div>
+  </div>
+</div>
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -315,46 +355,6 @@
           <button type="submit" class="btn btn-primary">Add</button>
         </div>
     </form>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="newSiteModal" tabindex="-1" role="dialog" aria-labelledby="newSiteModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="newSiteModalLabel">Add new site</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <form method="post" action={{ route('sites.store') }}>
-                @csrf
-                <input
-                type="hidden"
-                name="customer"
-                class="form-control"
-                id="customer"
-                value="{{ $customer->id }}"
-                />
-            <label
-                for="url"
-            >Url address</label>
-            <div class="form-group">
-                <input
-                type="string"
-                name="url"
-                class="form-control"
-                id="url"
-                placeholder="Url address"
-                />
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit"class="btn btn-primary">Add</button>
-        </div>
-        </form>
-
       </div>
     </div>
   </div>
