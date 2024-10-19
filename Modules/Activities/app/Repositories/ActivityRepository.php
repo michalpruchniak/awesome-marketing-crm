@@ -3,37 +3,37 @@
 namespace Modules\Activities\Repositories;
 
 use App\Enums\OrderByType;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Activities\DTO\GetAllActivitiesArgsDTO;
 use Modules\Activities\Models\Activity;
-use Modules\Customers\Models\Customer;
 
 class ActivityRepository
 {
 
-    public function getAll(?GetAllActivitiesArgsDTO $args):Collection {
+    public function getAll(?GetAllActivitiesArgsDTO $args):Collection|LengthAwarePaginator {
         $activity = Activity::query();
 
-        if($args->getCustomerId()) {
+        if ($args->getCustomerId()) {
             $activity->where('customer_id', $args->getCustomerId());
         }
 
-        if($args->getUserId()) {
+        if ($args->getUserId()) {
             $activity->where('user_id', $args->getUserId());
         }
 
-        if($args->getOrderBy()) {
+        if ($args->getOrderBy()) {
             $activity->orderBy('created_at', $args->getOrderBy());
         }
 
-        if($args->getLimit() && !$args->getPaginate()) {
-            $activity->limit($args->getLimit());
+        if ($args->getPaginate()) {
+            return $activity->paginate($args->getPaginate());
         }
 
-        if($args->getPaginate()) {
-            $activity->limit($args->getPaginate());
+        if ($args->getLimit() && !$args->getPaginate()) {
+            $activity->limit($args->getLimit());
         }
 
         return $activity->get();

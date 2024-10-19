@@ -17,13 +17,16 @@ use Modules\Users\Http\Middleware\ActiveUser;
 |
 */
 
-Route::prefix('activites')
+Route::prefix('activities')
      ->middleware(['auth', ActiveUser::class])
      ->group(function () {
 
+        Route::get('list/{id}',
+            [ActivityController::class, 'index'])
+            ->name('activity.list');
+
         Route::post('store',
             [ActivityController::class, 'store'])
-            ->name('activity.store')
-            ->can('add new customer');
+            ->name('activity.store');
 });
 

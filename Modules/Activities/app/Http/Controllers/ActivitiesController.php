@@ -4,15 +4,24 @@ namespace Modules\Activities\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Modules\Activities\Services\ActivityService;
 
 class ActivitiesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    private $activityService;
+
+    public function __construct(
+        ActivityService $activityService,
+    ) {
+        $this->activityService = $activityService;
+    }
+
+    public function index(int $id)
     {
-        return view('activities::index');
+        return view('activities::list')
+            ->with('mainTitle', 'List of Users')
+            ->with('headerTitle', 'List of Users')
+            ->with('users', $this->activityService->getAll($id));
     }
 
     /**

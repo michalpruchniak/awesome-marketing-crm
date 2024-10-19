@@ -123,7 +123,7 @@
                 <thead>
                     <tr>
                         <th>Type</th>
-                        <th>Description</th>
+                        <th style="width: 50%">Description</th>
                         <th>Duration</th>
                         <th>Added</th>
                         <th>User</th>
@@ -133,7 +133,7 @@
                     @foreach ($activities as $activity)
                         <tr>
                             <td>Solve technical problem</td>
-                            <td>{{ $activity->description }}</td>
+                            <td style="width: 50%">{{ $activity->description }}</td>
                             <td>{{ \Carbon\CarbonInterval::minutes($activity->duration)->cascade()->forHumans(['short' => true]) }}</td>
                             <td>{{ \Carbon\Carbon::parse($activity->created_at)->diffForHumans() }}</td>
                             <td>{{ $activity->user->name }}</td>
@@ -145,6 +145,9 @@
 
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addActivity">
             Add Activity
+          </button>
+        <a href={{ route('activity.list', ['id' => $customer->id]) }} class="btn btn-primary">
+            Show all
           </button>
         </div>
     </div>
