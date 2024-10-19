@@ -148,7 +148,7 @@
           </button>
         <a href={{ route('activity.list', ['id' => $customer->id]) }} class="btn btn-primary">
             Show all
-          </button>
+        </a>
         </div>
     </div>
 </div>
