@@ -326,7 +326,9 @@
                 class="form-control"
                 id="customer"
                 >
-                <option value="1">Technical problem solving</option>
+                @foreach ($activitiesType as $at)
+                    <option value="{{ $at->id }}">{{ $at->name }}</option>
+                @endforeach
                 </select>
         </div>
             <label
