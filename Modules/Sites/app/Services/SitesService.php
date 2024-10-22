@@ -24,6 +24,7 @@ class SitesService
 
     public function store(SiteRequest $request):Site {
         $site = $this->sitesRepository->store($request);
+
         $this->historiesService->store(Auth::id(), $request->customer, "New site: " . $request->url . " was added by " . Auth::user()->name);
 
         return $site;
