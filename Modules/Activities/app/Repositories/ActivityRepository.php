@@ -34,6 +34,7 @@ class ActivityRepository
         if ($args->getLimit() && !$args->getPaginate()) {
             $activity->limit($args->getLimit());
         }
+
         return $activity->get();
     }
 

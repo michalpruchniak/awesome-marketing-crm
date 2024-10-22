@@ -4,5 +4,6 @@
     "Histories": true,
     "Sites": true,
     "Passwords": true,
-    "Activities": true
+    "Activities": true,
+    "Reports": true
 }
