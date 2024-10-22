@@ -23,10 +23,12 @@ Route::prefix('activities')
 
         Route::get('list/{id}',
             [ActivityController::class, 'index'])
-            ->name('activity.list');
+            ->name('activity.list')
+            ->can("show activities");
 
         Route::post('store',
             [ActivityController::class, 'store'])
-            ->name('activity.store');
+            ->name('activity.store')
+            ->can('add activity');
 });
 

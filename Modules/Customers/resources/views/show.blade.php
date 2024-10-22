@@ -142,13 +142,16 @@
                 </tbody>
             </table>
         </div>
-
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addActivity">
-            Add Activity
-          </button>
+        @can('add activity')
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addActivity">
+                Add Activity
+            </button>
+        @endcan
+        @can('show activities')
         <a href={{ route('activity.list', ['id' => $customer->id]) }} class="btn btn-primary">
             Show all
         </a>
+        @endcan
         </div>
     </div>
 </div>
@@ -298,6 +301,7 @@
       </div>
     </div>
   </div>
+  @can("add activity")
   <div class="modal fade" id="addActivity" tabindex="-1" role="dialog" aria-labelledby="addActivityLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -354,6 +358,8 @@
       </div>
     </div>
   </div>
+  @endcan
+
 
 @endsection
 @section('scripts')
