@@ -4,7 +4,6 @@ namespace Modules\Activities\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-// use Modules\Activities\Database\Factories\ActivityTypeFactory;
 
 class ActivityType extends Model
 {
@@ -16,4 +15,8 @@ class ActivityType extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function activity() {
+        return $this->hasMany(Activity::class);
+    }
 }

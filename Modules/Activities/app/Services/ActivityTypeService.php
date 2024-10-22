@@ -16,7 +16,6 @@ class ActivityTypeService
     }
         public function getAll():Collection {
             $activityType = $this->activityTypeRepository->getAll();
-
             return $activityType;
         }
 }

@@ -132,9 +132,9 @@
                 <tbody>
                     @foreach ($activities as $activity)
                         <tr>
-                            <td>Solve technical problem</td>
+                            <td>@if(isset($activity->type->name) ){{ $activity->type->name }} @endif</td>
                             <td style="width: 50%">{{ $activity->description }}</td>
-                            <td>{{ \Carbon\CarbonInterval::minutes($activity->duration)->cascade()->forHumans(['short' => true]) }}</td>
+                            <td>{{ \Carbon\Carbon::createFromFormat('H:i:s', $activity->duration)->format('H:i') }}</td>
                             <td>{{ \Carbon\Carbon::parse($activity->created_at)->diffForHumans() }}</td>
                             <td>{{ $activity->user->name }}</td>
                         </tr>
@@ -341,15 +341,9 @@
                 class="form-control"
                 ></textarea>
             </div>
-            <label
-                for="description"
-            >Duration</label>
             <div class="form-group">
-                <label for='durationh'>h</label>
-                <input id='durationh' name='durationh' type='number' min='0' max='23' class="form-control" style="max-width: 100px; display: inline-block; margin-right: 10px;" value=0>
-
-                <label for='durationm'>m</label>
-                <input id='durationm' name='durationm' type='number' min='0' max='59' class="form-control" style="max-width: 100px; display: inline-block;" value=0>
+                <label for='duration'>Duration</label>
+                <input type="time" class="form-control" id="duration" name="duration" required>
             </div>
 
         <div class="modal-footer">

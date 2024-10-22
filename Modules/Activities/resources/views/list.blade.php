@@ -24,7 +24,7 @@
         <tr>
             <td>Solve technical problem</td>
             <td style="width: 50%">{{ $activity->description }}</td>
-            <td>{{ \Carbon\CarbonInterval::minutes($activity->duration)->cascade()->forHumans(['short' => true]) }}</td>
+            <td>{{ \Carbon\Carbon::createFromFormat('H:i:s', $activity->duration)->format('H:i') }}</td>
             <td>{{ \Carbon\Carbon::parse($activity->created_at)->diffForHumans() }}</td>
             <td>{{ $activity->user->name }}</td>
         </tr>

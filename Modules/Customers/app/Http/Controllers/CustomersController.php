@@ -7,7 +7,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Modules\Activities\Models\ActivityType;
 use Modules\Activities\Services\ActivityService;
 use Modules\Activities\Services\ActivityTypeService;
 use Modules\Customers\Http\Requests\CustomerRequest;
@@ -36,6 +35,7 @@ class CustomersController extends Controller
         $this->customersService = $customersService;
         $this->historiesService = $historiesService;
         $this->activityService = $activityService;
+        $this->activityTypeService = $activityTypeService;
         $this->users = $this->usersService->getAll();
     }
 
@@ -52,7 +52,7 @@ class CustomersController extends Controller
     public function show($id):View {
         $customer = $this->customersService->getOne($id);
         $activities = $this->activityService->getForCustomerPage($id);
-        $activitiesType = ActivityType::all();
+        $activitiesType = $this->activityTypeService->getAll();
 
         return view('customers::show')
                 ->with('mainTitle', 'Show and modify customer ' . $customer->name)

@@ -2,7 +2,6 @@
 
 namespace Modules\Activities\Repositories;
 
-use App\Enums\OrderByType;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -35,7 +34,6 @@ class ActivityRepository
         if ($args->getLimit() && !$args->getPaginate()) {
             $activity->limit($args->getLimit());
         }
-
         return $activity->get();
     }
 
@@ -47,6 +45,7 @@ class ActivityRepository
             'description' => $request->description,
             'duration' => $request->duration
         ]);
+
         return $activity;
     }
 }

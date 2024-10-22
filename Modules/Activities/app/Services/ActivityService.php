@@ -20,26 +20,17 @@ class ActivityService
     }
 
     public function store(Request $request) {
-        $hours = $request->input('durationh');
-        $minutes = $request->input('durationm');
-
-        $totalDuration = ($hours * 60) + $minutes;
-
-        $request->merge([
-            'duration' => $totalDuration
-        ]);
-
         $this->activityRepository->store($request);
     }
 
-    public function getForCustomerPage(int $id) {
+    public function getForCustomerPage(int $id):Collection|LengthAwarePaginator {
         $args = new GetAllActivitiesArgsDTO(customerId: $id, limit: 45, orderBy:OrderByType::DESC);
 
         return $this->activityRepository->getAll($args);
     }
 
-    public function getAll(int $id):Collection |LengthAwarePaginator{
-        $args = new GetAllActivitiesArgsDTO(customerId: $id, paginate: 45, orderBy:OrderByType::DESC);
+    public function getAll(int $id):Collection|LengthAwarePaginator {
+        $args = new GetAllActivitiesArgsDTO(customerId: $id, paginate: 55, orderBy:OrderByType::DESC);
 
         return $this->activityRepository->getAll($args);
     }

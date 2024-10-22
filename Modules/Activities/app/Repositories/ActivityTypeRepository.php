@@ -9,7 +9,6 @@ class ActivityTypeRepository
 {
     public function getAll():Collection {
         $activityType = ActivityType::all();
-
         return $activityType;
     }
 }

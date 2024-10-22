@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('user_id')->nullable();
             $table->integer('activity_type_id');
             $table->text('description');
-            $table->integer('duration');
+            $table->time('duration');
             $table->timestamps();
         });
     }
