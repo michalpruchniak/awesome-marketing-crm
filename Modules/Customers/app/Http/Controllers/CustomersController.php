@@ -16,12 +16,16 @@ use Modules\Users\Services\UsersService;
 
 class CustomersController extends Controller
 {
-
     private $usersService;
+
     private $customersService;
+
     private $historiesService;
+
     private $activityService;
+
     private $activityTypeService;
+
     private $users;
 
     public function __construct(
@@ -30,7 +34,7 @@ class CustomersController extends Controller
         HistoriesService $historiesService,
         ActivityService $activityService,
         ActivityTypeService $activityTypeService
-        ){
+    ) {
         $this->usersService = $usersService;
         $this->customersService = $customersService;
         $this->historiesService = $historiesService;
@@ -39,59 +43,64 @@ class CustomersController extends Controller
         $this->users = $this->usersService->getAll();
     }
 
-    public function index(Request $request):View {
+    public function index(Request $request): View
+    {
         $customers = $this->customersService->getAllWithPagination(15, $request);
 
         return view('customers::list')
-                ->with('mainTitle', 'List of customers')
-                ->with('headerTitle', 'List of customers')
-                ->with('users', $this->users)
-                ->with('customers', $customers);
+            ->with('mainTitle', 'List of customers')
+            ->with('headerTitle', 'List of customers')
+            ->with('users', $this->users)
+            ->with('customers', $customers);
     }
 
-    public function show($id):View {
+    public function show($id): View
+    {
         $customer = $this->customersService->getOne($id);
         $activities = $this->activityService->getForCustomerPage($id);
         $activitiesType = $this->activityTypeService->getAll();
 
         return view('customers::show')
-                ->with('mainTitle', 'Show and modify customer ' . $customer->name)
-                ->with('headerTitle', 'Customer: ' . $customer->name)
-                ->with('customer', $customer)
-                ->with('activitiesType', $activitiesType)
-                ->with('activities', $activities);
+            ->with('mainTitle', 'Show and modify customer '.$customer->name)
+            ->with('headerTitle', 'Customer: '.$customer->name)
+            ->with('customer', $customer)
+            ->with('activitiesType', $activitiesType)
+            ->with('activities', $activities);
     }
 
-    public function create():View {
+    public function create(): View
+    {
         return view('customers::create')
-                ->with('headerTitle', 'Create new customer')
-                ->with('users', $this->users);
+            ->with('headerTitle', 'Create new customer')
+            ->with('users', $this->users);
     }
 
-
-    public function store(CustomerRequest $request):RedirectResponse {
+    public function store(CustomerRequest $request): RedirectResponse
+    {
         $customer = $this->customersService->store($request);
 
-        $message = 'User ' . $customer->user->name . ' was added customer ' . $customer->name;
+        $message = 'User '.$customer->user->name.' was added customer '.$customer->name;
         $this->historiesService->store(Auth::id(), $customer->id, $message);
 
         return redirect()->route('customers.show', ['id' => $customer->id]);
     }
 
-    public function edit($id):View {
+    public function edit($id): View
+    {
         $customer = $this->customersService->getOne($id);
 
         return view('customers::create')
-                ->with('customer', $customer)
-                ->with('headerTitle', 'Edit customer ' . $customer->name)
-                ->with('mainTitle', 'Edit customer ' . $customer->name)
-                ->with('users', $this->users);
+            ->with('customer', $customer)
+            ->with('headerTitle', 'Edit customer '.$customer->name)
+            ->with('mainTitle', 'Edit customer '.$customer->name)
+            ->with('users', $this->users);
     }
 
-    public function update($id, CustomerRequest $request):RedirectResponse {
+    public function update($id, CustomerRequest $request): RedirectResponse
+    {
         $customer = $this->customersService->update($id, $request);
 
-        $message = 'User ' . $customer->user->name . ' was updated customer ' . $customer->name;
+        $message = 'User '.$customer->user->name.' was updated customer '.$customer->name;
         $this->historiesService->store(Auth::id(), $customer->id, $message);
 
         return redirect()->route('customers.show', ['id' => $customer->id]);

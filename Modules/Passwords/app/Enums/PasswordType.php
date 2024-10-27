@@ -2,7 +2,7 @@
 
 namespace Modules\Passwords\Enums;
 
-enum PasswordType:int
+enum PasswordType: int
 {
     case OTHER = 1;
     case WEBSITE_PANEL = 2;

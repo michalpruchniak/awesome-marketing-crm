@@ -14,8 +14,11 @@ class ActivityTypeService
     ) {
         $this->activityTypeRepository = $activityTypeRepository;
     }
-        public function getAll():Collection {
-            $activityType = $this->activityTypeRepository->getAll();
-            return $activityType;
-        }
+
+    public function getAll(): Collection
+    {
+        $activityType = $this->activityTypeRepository->getAll();
+
+        return $activityType;
+    }
 }

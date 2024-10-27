@@ -10,13 +10,14 @@ class TimeActivesForCustomerCreator extends ReportCreator
 {
     private $customer;
 
-    function __construct(Customer $customer)
+    public function __construct(Customer $customer)
     {
         $this->customer = $customer;
         $this->viewAddress = 'reports::time-activity-for-customer';
     }
 
-    public function generate() {
+    public function generate()
+    {
         $time = app()->makeWith(TimeActivesForCustomer::class, ['customer' => $this->customer]);
 
         return $time->getData($this->customer);

@@ -9,16 +9,18 @@ use Modules\Sites\Models\Site;
 
 class SitesRepository
 {
-    public function store(SiteRequest $request):Site {
+    public function store(SiteRequest $request): Site
+    {
         $site = Site::create([
-            'customer_id' => (int)$request->customer,
+            'customer_id' => (int) $request->customer,
             'url' => $request->url,
         ]);
 
         return $site;
     }
 
-    public function getAllForCustomer(Int $id):Collection {
+    public function getAllForCustomer(int $id): Collection
+    {
         $customer = Customer::findOrFail($id);
         $sites = $customer->sites;
 

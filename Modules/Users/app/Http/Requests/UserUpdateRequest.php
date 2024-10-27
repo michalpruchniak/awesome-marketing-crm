@@ -15,7 +15,7 @@ class UserUpdateRequest extends FormRequest
             'name' => 'required|string|between:3,50',
             'email' => 'required|email',
             'password' => 'nullable|between:5,55',
-            'role' => 'required|exists:roles,id'
+            'role' => 'required|exists:roles,id',
         ];
     }
 

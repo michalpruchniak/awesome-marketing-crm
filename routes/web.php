@@ -13,9 +13,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/test', function() {
+Route::get('/test', function () {
     $customer = Customer::first();
     $test = new TimeActivesForCustomerCreator($customer);
+
     return $test->view();
 });
 

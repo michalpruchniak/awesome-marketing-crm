@@ -3,8 +3,8 @@
 namespace Modules\Customers\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Modules\Activities\Models\Activity;
 use Modules\Histories\Models\History;
 use Modules\Passwords\Models\Password;
@@ -21,33 +21,39 @@ class Customer extends Model
         'user_id',
         'name',
         'active',
-        'lead'
+        'lead',
     ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function histories() {
+    public function histories()
+    {
         return $this->hasMany(History::class);
     }
 
-    public function latestHistories($limit = 5) {
+    public function latestHistories($limit = 5)
+    {
         return $this->histories()
-                    ->orderBy('created_at', 'desc')
-                    ->take($limit)
-                    ->get();
+            ->orderBy('created_at', 'desc')
+            ->take($limit)
+            ->get();
     }
 
-    public function sites() {
+    public function sites()
+    {
         return $this->hasMany(Site::class);
     }
 
-    public function passwords() {
+    public function passwords()
+    {
         return $this->hasMany(Password::class);
     }
 
-    public function activities() {
+    public function activities()
+    {
         return $this->belongsToMany(Activity::class);
     }
 }

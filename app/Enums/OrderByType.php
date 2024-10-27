@@ -2,10 +2,8 @@
 
 namespace App\Enums;
 
-enum OrderByType:string
+enum OrderByType: string
 {
     case ASC = 'asc';
     case DESC = 'desc';
 }
-
-

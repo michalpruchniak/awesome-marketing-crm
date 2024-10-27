@@ -4,7 +4,6 @@ namespace Modules\Users\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use Modules\Users\Providers\UsersRepositoryServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 
 class UsersServiceProvider extends ServiceProvider

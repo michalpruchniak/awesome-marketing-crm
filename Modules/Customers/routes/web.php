@@ -16,8 +16,8 @@ use Modules\Users\Http\Middleware\ActiveUser;
 */
 
 Route::prefix('customers')
-     ->middleware(['auth', ActiveUser::class])
-     ->group(function () {
+    ->middleware(['auth', ActiveUser::class])
+    ->group(function () {
 
         Route::get('',
             [CustomersController::class, 'index'])
@@ -46,4 +46,4 @@ Route::prefix('customers')
             [CustomersController::class, 'update'])
             ->name('customers.update')
             ->can('add new customer');
-});
+    });

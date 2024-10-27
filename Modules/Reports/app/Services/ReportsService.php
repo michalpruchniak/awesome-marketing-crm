@@ -2,7 +2,4 @@
 
 namespace Modules\Reports\Services;
 
-class ReportsService
-{
-
-}
+class ReportsService {}

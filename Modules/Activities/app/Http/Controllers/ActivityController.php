@@ -4,7 +4,6 @@ namespace Modules\Activities\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Activities\Http\Requests\ActivityRequest;
 use Modules\Activities\Services\ActivityService;
@@ -14,7 +13,9 @@ use Modules\Histories\Services\HistoriesService;
 class ActivityController extends Controller
 {
     private $activityService;
+
     private $customersService;
+
     private $historiesService;
 
     public function __construct(
@@ -32,17 +33,17 @@ class ActivityController extends Controller
         $customer = $this->customersService->getOne($id);
 
         return view('activities::list')
-            ->with('mainTitle', 'List of Activities for customer ' . $customer->name)
-            ->with('headerTitle', 'List of Activities | ' . $customer->name)
+            ->with('mainTitle', 'List of Activities for customer '.$customer->name)
+            ->with('headerTitle', 'List of Activities | '.$customer->name)
             ->with('activities', $this->activityService->getAll($id));
     }
 
+    public function store(ActivityRequest $request): RedirectResponse
+    {
+        $activity = $this->activityService->store($request);
 
-  public function store(ActivityRequest $request):RedirectResponse {
-    $activity = $this->activityService->store($request);
+        $this->historiesService->store(Auth::id(), $request->customer, 'User '.Auth::user()->name.'was added new activity '.$activity->description);
 
-    $this->historiesService->store(Auth::id(), $request->customer, "User " . Auth::user()->name . "was added new activity " . $activity->description);
-
-    return redirect()->back();
-  }
+        return redirect()->back();
+    }
 }

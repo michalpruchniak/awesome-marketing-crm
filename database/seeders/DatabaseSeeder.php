@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Modules\Activities\Database\Seeders\ActivityTypeTableSeeder;
@@ -16,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserTableSeeder::class,
-            ActivityTypeTableSeeder::class
+            ActivityTypeTableSeeder::class,
         ]);
     }
 }

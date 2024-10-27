@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Activities\Http\Controllers\ActivitiesController;
 use Modules\Activities\Http\Controllers\ActivityController;
-use Modules\Customers\Http\Controllers\CustomersController;
 use Modules\Users\Http\Middleware\ActiveUser;
 
 /*
@@ -18,17 +16,16 @@ use Modules\Users\Http\Middleware\ActiveUser;
 */
 
 Route::prefix('activities')
-     ->middleware(['auth', ActiveUser::class])
-     ->group(function () {
+    ->middleware(['auth', ActiveUser::class])
+    ->group(function () {
 
         Route::get('list/{id}',
             [ActivityController::class, 'index'])
             ->name('activity.list')
-            ->can("show activities");
+            ->can('show activities');
 
         Route::post('store',
             [ActivityController::class, 'store'])
             ->name('activity.store')
             ->can('add activity');
-});
-
+    });

@@ -18,53 +18,52 @@ use Modules\Users\Http\Middleware\ActiveUser;
 
 Route::get('/login',
     [AuthController::class, 'login'])
-    ->name("login");
+    ->name('login');
 
 Route::post('/login',
     [AuthController::class, 'store'])
-    ->name("login");
+    ->name('login');
 
 Route::post('/logout',
     [AuthController::class, 'destroy'])
-    ->name("logout");
+    ->name('logout');
 
 Route::prefix('users')
     ->middleware(['auth', ActiveUser::class])
     ->group(function () {
 
-       Route::get('list',
-           [UsersController::class, 'index'])
-           ->can('manage users')
-           ->name('users.list');
+        Route::get('list',
+            [UsersController::class, 'index'])
+            ->can('manage users')
+            ->name('users.list');
 
-       Route::get('create',
-           [UsersController::class, 'create'])
-           ->can('manage users')
-           ->name('users.create');
+        Route::get('create',
+            [UsersController::class, 'create'])
+            ->can('manage users')
+            ->name('users.create');
 
-       Route::post('store',
-           [UsersController::class, 'store'])
-           ->can('manage users')
-           ->name('users.store');
+        Route::post('store',
+            [UsersController::class, 'store'])
+            ->can('manage users')
+            ->name('users.store');
 
         Route::get('edit/{id}',
-           [UsersController::class, 'edit'])
-           ->can('manage users')
-           ->name('users.edit');
+            [UsersController::class, 'edit'])
+            ->can('manage users')
+            ->name('users.edit');
 
         Route::patch('update/{id}',
-           [UsersController::class, 'update'])
-           ->can('manage users')
-           ->name('users.update');
+            [UsersController::class, 'update'])
+            ->can('manage users')
+            ->name('users.update');
 
         Route::delete('delete/{id}',
-           [UsersController::class, 'destroy'])
-           ->can('manage users')
-           ->name('users.destroy');
+            [UsersController::class, 'destroy'])
+            ->can('manage users')
+            ->name('users.destroy');
 
         Route::get('delete-ban/{id}',
-           [UsersController::class, 'deleteBan'])
-           ->can('manage users')
-           ->name('users.deleteBan');
-});
-
+            [UsersController::class, 'deleteBan'])
+            ->can('manage users')
+            ->name('users.deleteBan');
+    });

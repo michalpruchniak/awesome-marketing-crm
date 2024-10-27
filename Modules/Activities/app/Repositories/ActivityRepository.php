@@ -11,8 +11,8 @@ use Modules\Activities\Models\Activity;
 
 class ActivityRepository
 {
-
-    public function getAll(?GetAllActivitiesArgsDTO $args):Collection|LengthAwarePaginator {
+    public function getAll(?GetAllActivitiesArgsDTO $args): Collection|LengthAwarePaginator
+    {
         $activity = Activity::query();
 
         if ($args->getCustomerId()) {
@@ -31,20 +31,21 @@ class ActivityRepository
             return $activity->paginate($args->getPaginate());
         }
 
-        if ($args->getLimit() && !$args->getPaginate()) {
+        if ($args->getLimit() && ! $args->getPaginate()) {
             $activity->limit($args->getLimit());
         }
 
         return $activity->get();
     }
 
-    public function store(Request $request):Activity {
+    public function store(Request $request): Activity
+    {
         $activity = Activity::create([
             'user_id' => Auth::id(),
             'customer_id' => $request->customer,
             'activity_type_id' => $request->type,
             'description' => $request->description,
-            'duration' => $request->duration
+            'duration' => $request->duration,
         ]);
 
         return $activity;

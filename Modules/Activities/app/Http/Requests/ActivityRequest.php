@@ -15,7 +15,7 @@ class ActivityRequest extends FormRequest
             'customer' => 'required|integer|exists:customers,id',
             'type' => 'required|integer|exists:activity_types,id',
             'duration' => 'required|date_format:H:i',
-            'description' => 'required|string|between:3,300'
+            'description' => 'required|string|between:3,300',
         ];
     }
 

@@ -1,13 +1,19 @@
 <?php
+
 namespace Modules\Activities\DTO;
 
 use App\Enums\OrderByType;
 
-class GetAllActivitiesArgsDTO {
+class GetAllActivitiesArgsDTO
+{
     private ?OrderByType $orderBy;
+
     private ?int $limit;
+
     private ?int $paginate;
+
     private ?int $customerId;
+
     private ?int $userId;
 
     public function __construct(

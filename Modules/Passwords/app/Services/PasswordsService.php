@@ -3,7 +3,6 @@
 namespace Modules\Passwords\Services;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 use Modules\Histories\Services\HistoriesService;
@@ -14,6 +13,7 @@ use Modules\Passwords\Repositories\PasswordsRepository;
 class PasswordsService
 {
     private $passwordsRepository;
+
     private $historiesService;
 
     public function __construct(
@@ -24,7 +24,8 @@ class PasswordsService
         $this->historiesService = $historiesService;
     }
 
-    public function getDecryptPassword(int $id):Collection {
+    public function getDecryptPassword(int $id): Collection
+    {
         $password = $this->passwordsRepository->getOne($id);
 
         $passwordCollection = new Collection([
@@ -34,15 +35,16 @@ class PasswordsService
             'password' => Crypt::decrypt($password->password),
         ]);
 
-        $this->historiesService->store(Auth::id(), $password->customer_id, Auth::user()->name . " user got password " . $password->name . " customer " . $password->customer->name);
+        $this->historiesService->store(Auth::id(), $password->customer_id, Auth::user()->name.' user got password '.$password->name.' customer '.$password->customer->name);
 
         return $passwordCollection;
     }
 
-    public function store(PasswordRequest $request):Password {
+    public function store(PasswordRequest $request): Password
+    {
         $password = $this->passwordsRepository->store($request);
 
-        $this->historiesService->store(Auth::id(), $password->customer_id, "The password " . $password->name . " was added by " . Auth::user()->name);
+        $this->historiesService->store(Auth::id(), $password->customer_id, 'The password '.$password->name.' was added by '.Auth::user()->name);
 
         return $password;
     }

@@ -21,7 +21,7 @@ class PasswordRequest extends FormRequest
             'login' => 'required|string|between:2,30',
             'password' => 'required|string|between:3,60',
             'port' => 'nullable|integer|between:1,30000',
-            'notes' => 'nullable|string|max:300'
+            'notes' => 'nullable|string|max:300',
 
         ];
     }

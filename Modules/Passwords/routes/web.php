@@ -16,8 +16,8 @@ use Modules\Users\Http\Middleware\ActiveUser;
 */
 
 Route::prefix('passwords')
-     ->middleware(['auth', ActiveUser::class])
-     ->group(function () {
+    ->middleware(['auth', ActiveUser::class])
+    ->group(function () {
 
         Route::post('store',
             [PasswordsController::class, 'store'])
@@ -28,4 +28,4 @@ Route::prefix('passwords')
             [PasswordsController::class, 'getPassword'])
             ->name('got password');
 
-});
+    });

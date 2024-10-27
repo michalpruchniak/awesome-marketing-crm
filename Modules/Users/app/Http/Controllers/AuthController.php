@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Modules\Users\Http\Requests\LoginRequest;
 use Modules\Users\Services\LoginService;
 
@@ -16,7 +15,7 @@ class AuthController extends Controller
 
     public function __construct(
         LoginService $loginService
-    ){
+    ) {
         $this->loginService = $loginService;
     }
 
@@ -24,7 +23,6 @@ class AuthController extends Controller
     {
         return view('users::login');
     }
-
 
     public function store(LoginRequest $request): RedirectResponse
     {
@@ -39,5 +37,4 @@ class AuthController extends Controller
 
         return redirect('/');
     }
-
 }

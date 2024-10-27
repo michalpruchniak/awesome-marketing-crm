@@ -2,8 +2,8 @@
 
 namespace Modules\Activities\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class ActivityType extends Model
 {
@@ -13,10 +13,11 @@ class ActivityType extends Model
      * The attributes that are mass assignable.
      */
     protected $fillable = [
-        'name'
+        'name',
     ];
 
-    public function activity() {
+    public function activity()
+    {
         return $this->hasMany(Activity::class);
     }
 }

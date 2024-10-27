@@ -12,17 +12,19 @@ class HistoriesService
 
     public function __construct(
         HistoriesRepository $historiesRepository
-    ){
+    ) {
         $this->historiesRepository = $historiesRepository;
     }
 
-    public function getForCustomer(int $id):Collection {
+    public function getForCustomer(int $id): Collection
+    {
         $histories = $this->historiesRepository->getForCustomer($id);
 
         return $histories;
     }
 
-    public function store(int $user_id=null, int $customer_id, string $message):History {
+    public function store(?int $user_id, int $customer_id, string $message): History
+    {
         $history = $this->historiesRepository->store($user_id, $customer_id, $message);
 
         return $history;

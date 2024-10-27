@@ -16,10 +16,10 @@ use Modules\Users\Http\Middleware\ActiveUser;
 */
 
 Route::prefix('histories')
-     ->middleware(['auth', ActiveUser::class])
-     ->group(function () {
+    ->middleware(['auth', ActiveUser::class])
+    ->group(function () {
 
         Route::get('show/{id}',
             [HistoriesController::class, 'show'])
             ->name('histories.show');
-});
+    });

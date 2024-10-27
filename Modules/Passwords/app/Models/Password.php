@@ -2,8 +2,8 @@
 
 namespace Modules\Passwords\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Modules\Customers\Models\Customer;
 use Modules\Passwords\Enums\PasswordType;
 
@@ -22,14 +22,15 @@ class Password extends Model
         'login',
         'password',
         'port',
-        'notes'
+        'notes',
     ];
 
     protected $casts = [
         'type' => PasswordType::class,
     ];
 
-    public function customer() {
+    public function customer()
+    {
         return $this->belongsTo(Customer::class);
     }
 }

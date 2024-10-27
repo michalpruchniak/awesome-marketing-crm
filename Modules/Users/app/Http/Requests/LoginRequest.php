@@ -1,4 +1,5 @@
 <?php
+
 namespace Modules\Users\Http\Requests;
 
 use Illuminate\Auth\Events\Lockout;

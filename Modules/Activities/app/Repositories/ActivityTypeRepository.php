@@ -7,8 +7,10 @@ use Modules\Activities\Models\ActivityType;
 
 class ActivityTypeRepository
 {
-    public function getAll():Collection {
+    public function getAll(): Collection
+    {
         $activityType = ActivityType::all();
+
         return $activityType;
     }
 }

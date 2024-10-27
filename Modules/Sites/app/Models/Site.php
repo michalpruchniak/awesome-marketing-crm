@@ -2,8 +2,8 @@
 
 namespace Modules\Sites\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Modules\Customers\Models\Customer;
 
 class Site extends Model
@@ -15,10 +15,11 @@ class Site extends Model
      */
     protected $fillable = [
         'customer_id',
-        'url'
+        'url',
     ];
 
-    public function customer(){
+    public function customer()
+    {
         return $this->belongsTo(Customer::class);
     }
 }

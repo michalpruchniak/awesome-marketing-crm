@@ -3,8 +3,8 @@
 namespace Modules\Activities\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Activity extends Model
 {
@@ -18,14 +18,16 @@ class Activity extends Model
         'user_id',
         'activity_type_id',
         'description',
-        'duration'
+        'duration',
     ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function type() {
+    public function type()
+    {
         return $this->belongsTo(ActivityType::class, 'activity_type_id');
     }
 }

@@ -20,20 +20,23 @@ class ActivityService
         $this->activityRepository = $activityRepository;
     }
 
-    public function store(Request $request):Activity {
+    public function store(Request $request): Activity
+    {
         $activity = $this->activityRepository->store($request);
 
         return $activity;
     }
 
-    public function getForCustomerPage(int $id):Collection|LengthAwarePaginator {
-        $args = new GetAllActivitiesArgsDTO(customerId: $id, limit: 45, orderBy:OrderByType::DESC);
+    public function getForCustomerPage(int $id): Collection|LengthAwarePaginator
+    {
+        $args = new GetAllActivitiesArgsDTO(customerId: $id, limit: 45, orderBy: OrderByType::DESC);
 
         return $this->activityRepository->getAll($args);
     }
 
-    public function getAll(int $id):Collection|LengthAwarePaginator {
-        $args = new GetAllActivitiesArgsDTO(customerId: $id, paginate: 55, orderBy:OrderByType::DESC);
+    public function getAll(int $id): Collection|LengthAwarePaginator
+    {
+        $args = new GetAllActivitiesArgsDTO(customerId: $id, paginate: 55, orderBy: OrderByType::DESC);
 
         return $this->activityRepository->getAll($args);
     }

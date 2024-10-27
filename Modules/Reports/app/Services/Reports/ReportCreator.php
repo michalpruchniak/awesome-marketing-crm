@@ -8,13 +8,15 @@ abstract class ReportCreator
 {
     protected $viewAddress;
 
-    abstract function generate();
+    abstract public function generate();
 
-    public function json() {
+    public function json()
+    {
         return json_encode($this->generate());
     }
 
-    public function view() {
+    public function view()
+    {
         return View::make($this->viewAddress, ['data' => $this->generate()]);
     }
 }

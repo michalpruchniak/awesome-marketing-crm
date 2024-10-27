@@ -13,7 +13,7 @@ class CustomerRequest extends FormRequest
     {
         return [
             'name' => 'required|string|between:2,35',
-            'user' => 'nullable|exists:users,id'
+            'user' => 'nullable|exists:users,id',
         ];
     }
 

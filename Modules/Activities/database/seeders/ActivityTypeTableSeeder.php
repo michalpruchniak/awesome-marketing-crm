@@ -13,7 +13,7 @@ class ActivityTypeTableSeeder extends Seeder
     public function run(): void
     {
         ActivityType::create([
-            'name' => 'Solve technical problem'
+            'name' => 'Solve technical problem',
         ]);
     }
 }

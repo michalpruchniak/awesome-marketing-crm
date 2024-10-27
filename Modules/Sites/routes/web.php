@@ -16,10 +16,10 @@ use Modules\Users\Http\Middleware\ActiveUser;
 */
 
 Route::prefix('sites')
-     ->middleware(['auth', ActiveUser::class])
-     ->group(function () {
+    ->middleware(['auth', ActiveUser::class])
+    ->group(function () {
 
         Route::post('store',
             [SitesController::class, 'store'])
             ->name('sites.store');
-});
+    });

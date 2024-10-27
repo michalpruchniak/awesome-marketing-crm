@@ -2,21 +2,21 @@
 
 namespace Modules\Passwords\Repositories;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Modules\Passwords\Http\Requests\PasswordRequest;
 use Modules\Passwords\Models\Password;
 
-
 class PasswordsRepository
 {
-    public function getOne(int $id):Password {
+    public function getOne(int $id): Password
+    {
         $password = Password::findOrFail($id);
 
         return $password;
     }
 
-    public function store(PasswordRequest $request):Password {
+    public function store(PasswordRequest $request): Password
+    {
         $password = Password::create([
             'customer_id' => $request->customer,
             'name' => $request->name,
@@ -25,7 +25,7 @@ class PasswordsRepository
             'login' => Crypt::encrypt($request->login),
             'password' => Crypt::encrypt($request->password),
             'port' => $request->port,
-            'notes' => $request->notes
+            'notes' => $request->notes,
         ]);
 
         return $password;

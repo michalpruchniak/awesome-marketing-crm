@@ -17,7 +17,7 @@ class SitesController extends Controller
         $this->sitesService = $sitesService;
     }
 
-    public function store(SiteRequest $request):RedirectResponse
+    public function store(SiteRequest $request): RedirectResponse
     {
         $this->sitesService->store($request);
 

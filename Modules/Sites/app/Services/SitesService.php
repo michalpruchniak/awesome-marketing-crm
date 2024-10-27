@@ -12,6 +12,7 @@ use Modules\Sites\Repositories\SitesRepository;
 class SitesService
 {
     private $sitesRepository;
+
     private $historiesService;
 
     public function __construct(
@@ -22,15 +23,17 @@ class SitesService
         $this->historiesService = $historiesService;
     }
 
-    public function store(SiteRequest $request):Site {
+    public function store(SiteRequest $request): Site
+    {
         $site = $this->sitesRepository->store($request);
 
-        $this->historiesService->store(Auth::id(), $request->customer, "New site: " . $request->url . " was added by " . Auth::user()->name);
+        $this->historiesService->store(Auth::id(), $request->customer, 'New site: '.$request->url.' was added by '.Auth::user()->name);
 
         return $site;
     }
 
-    public function getAllForCustomer(int $id):Collection {
+    public function getAllForCustomer(int $id): Collection
+    {
         $sites = $this->sitesRepository->getAllForCustomer($id);
 
         return $sites;
