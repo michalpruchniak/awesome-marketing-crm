@@ -2,6 +2,8 @@
 
 namespace Modules\Reports\Services\Reports\Products;
 
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Modules\Activities\Services\ActivityService;
 use Modules\Customers\Models\Customer;
 
@@ -19,8 +21,11 @@ class TimeActivesForCustomer
         $this->customer = $customer;
     }
 
-    public function getData()
+    public function getData(): Collection
     {
-        return $this->activityService->getForCustomerPage($this->customer->id);
+        $from = Carbon::now()->subMonth(6)->startOfMonth();
+        $to = Carbon::now()->endOfMonth();
+
+        return $this->activityService->activityStatsForCustomerPage($this->customer->id, $from, $to);
     }
 }

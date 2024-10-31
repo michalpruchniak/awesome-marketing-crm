@@ -2,24 +2,24 @@
 
 namespace Modules\Reports\Services\Reports\Creators;
 
+use Illuminate\Database\Eloquent\Collection;
 use Modules\Customers\Models\Customer;
 use Modules\Reports\Services\Reports\Products\TimeActivesForCustomer;
 use Modules\Reports\Services\Reports\ReportCreator;
 
 class TimeActivesForCustomerCreator extends ReportCreator
 {
-    private $customer;
-
     public function __construct(Customer $customer)
     {
-        $this->customer = $customer;
         $this->viewAddress = 'reports::time-activity-for-customer';
+        $this->customer = $customer;
     }
 
-    public function generate()
+    public function generate(Customer $customer): Collection
     {
-        $time = app()->makeWith(TimeActivesForCustomer::class, ['customer' => $this->customer]);
+        $this->customer = $customer;
+        $activities = app()->makeWith(TimeActivesForCustomer::class, ['customer' => $this->customer]);
 
-        return $time->getData($this->customer);
+        return $activities->getData($this->customer);
     }
 }

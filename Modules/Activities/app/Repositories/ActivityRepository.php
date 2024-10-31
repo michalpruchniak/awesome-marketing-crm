@@ -2,6 +2,7 @@
 
 namespace Modules\Activities\Repositories;
 
+use DateTime;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -49,5 +50,17 @@ class ActivityRepository
         ]);
 
         return $activity;
+    }
+
+    public function ActivityStatsForCustomerPage(int $id, DateTime $from, DateTime $to)
+    {
+        $stats = Activity::where('customer_id', $id)
+            ->whereBetween('created_at', [$from, $to])
+            ->selectRaw("DATE_FORMAT(created_at, '%Y-%m') as month, SEC_TO_TIME(SUM(TIME_TO_SEC(duration))) as total_duration")
+            ->groupBy('month')
+            ->orderBy('month', 'desc')
+            ->get();
+
+        return $stats;
     }
 }

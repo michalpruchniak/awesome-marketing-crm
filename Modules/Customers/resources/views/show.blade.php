@@ -155,6 +155,13 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="card col-12 col-md-6">
+        <div class="card-body">
+        <h2 class="card-title mb-2"><strong>Activities Raport</strong></h2>
+        {!! $activitiesRaport !!}
+    </div>
+</div>
 <div class="modal fade" id="newSiteModal" tabindex="-1" role="dialog" aria-labelledby="newSiteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">

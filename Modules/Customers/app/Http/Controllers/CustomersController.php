@@ -12,6 +12,7 @@ use Modules\Activities\Services\ActivityTypeService;
 use Modules\Customers\Http\Requests\CustomerRequest;
 use Modules\Customers\Services\CustomersService;
 use Modules\Histories\Services\HistoriesService;
+use Modules\Reports\Services\Reports\Creators\TimeActivesForCustomerCreator;
 use Modules\Users\Services\UsersService;
 
 class CustomersController extends Controller
@@ -60,12 +61,15 @@ class CustomersController extends Controller
         $activities = $this->activityService->getForCustomerPage($id);
         $activitiesType = $this->activityTypeService->getAll();
 
+        $activitiesRaport = new TimeActivesForCustomerCreator($customer);
+
         return view('customers::show')
             ->with('mainTitle', 'Show and modify customer '.$customer->name)
             ->with('headerTitle', 'Customer: '.$customer->name)
             ->with('customer', $customer)
             ->with('activitiesType', $activitiesType)
-            ->with('activities', $activities);
+            ->with('activities', $activities)
+            ->with('activitiesRaport', $activitiesRaport->view());
     }
 
     public function create(): View

@@ -3,6 +3,7 @@
 namespace Modules\Activities\Services;
 
 use App\Enums\OrderByType;
+use DateTime;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -39,5 +40,10 @@ class ActivityService
         $args = new GetAllActivitiesArgsDTO(customerId: $id, paginate: 55, orderBy: OrderByType::DESC);
 
         return $this->activityRepository->getAll($args);
+    }
+
+    public function activityStatsForCustomerPage(int $id, DateTime $from, dateTime $to)
+    {
+        return $this->activityRepository->ActivityStatsForCustomerPage($id, $from, $to);
     }
 }

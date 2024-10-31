@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Modules\Customers\Models\Customer;
 use Modules\Reports\Services\Reports\Creators\TimeActivesForCustomerCreator;
