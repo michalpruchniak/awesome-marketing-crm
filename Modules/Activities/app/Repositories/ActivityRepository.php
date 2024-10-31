@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\Activities\DTO\GetAllActivitiesArgsDTO;
 use Modules\Activities\Models\Activity;
+use Illuminate\Support\Facades\Cache;
+
 
 class ActivityRepository
 {
@@ -54,12 +56,16 @@ class ActivityRepository
 
     public function ActivityStatsForCustomerPage(int $id, DateTime $from, DateTime $to)
     {
-        $stats = Activity::where('customer_id', $id)
-            ->whereBetween('created_at', [$from, $to])
-            ->selectRaw("DATE_FORMAT(created_at, '%Y-%m') as month, SEC_TO_TIME(SUM(TIME_TO_SEC(duration))) as total_duration")
-            ->groupBy('month')
-            ->orderBy('month', 'desc')
-            ->get();
+        $cacheKey = "activity_stats_for_customer_{$id}";
+
+        $stats = Cache::remember($cacheKey, 1440, function () use ($id, $from, $to) {
+            return Activity::where('customer_id', $id)
+                ->whereBetween('created_at', [$from, $to])
+                ->selectRaw("DATE_FORMAT(created_at, '%Y-%m') as month, SEC_TO_TIME(SUM(TIME_TO_SEC(duration))) as total_duration")
+                ->groupBy('month')
+                ->orderBy('month', 'desc')
+                ->get();
+        });
 
         return $stats;
     }
