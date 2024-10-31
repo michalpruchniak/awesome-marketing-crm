@@ -42,7 +42,7 @@ class ActivityService
         return $this->activityRepository->getAll($args);
     }
 
-    public function activityStatsForCustomerPage(int $id, DateTime $from, dateTime $to)
+    public function activityStatsForCustomerPage(int $id, DateTime $from, dateTime $to): Collection
     {
         return $this->activityRepository->ActivityStatsForCustomerPage($id, $from, $to);
     }

@@ -4,10 +4,11 @@ namespace Modules\Reports\Services\Reports\Creators;
 
 use Illuminate\Database\Eloquent\Collection;
 use Modules\Customers\Models\Customer;
+use Modules\Reports\Services\Reports\Interfaces\ReportConcreteCreatorInterface;
 use Modules\Reports\Services\Reports\Products\TimeActivesForCustomer;
 use Modules\Reports\Services\Reports\ReportCreator;
 
-class TimeActivesForCustomerCreator extends ReportCreator
+class TimeActivesForCustomerCreator extends ReportCreator implements ReportConcreteCreatorInterface
 {
     public function __construct(Customer $customer)
     {

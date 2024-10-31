@@ -6,11 +6,11 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Modules\Activities\Services\ActivityService;
 use Modules\Customers\Models\Customer;
+use Modules\Reports\Services\Reports\Interfaces\ReportProductInterface;
 
-class TimeActivesForCustomer
+class TimeActivesForCustomer implements ReportProductInterface
 {
     private $activityService;
-
     private $customer;
 
     public function __construct(
