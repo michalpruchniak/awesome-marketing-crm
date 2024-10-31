@@ -12,7 +12,7 @@ use Modules\Activities\Services\ActivityTypeService;
 use Modules\Customers\Http\Requests\CustomerRequest;
 use Modules\Customers\Services\CustomersService;
 use Modules\Histories\Services\HistoriesService;
-use Modules\Reports\Services\Reports\Creators\TimeActivesForCustomerCreator;
+use Modules\Reports\Services\ReportsService;
 use Modules\Users\Services\UsersService;
 
 class CustomersController extends Controller
@@ -27,6 +27,8 @@ class CustomersController extends Controller
 
     private $activityTypeService;
 
+    private $reportService;
+
     private $users;
 
     public function __construct(
@@ -34,13 +36,15 @@ class CustomersController extends Controller
         CustomersService $customersService,
         HistoriesService $historiesService,
         ActivityService $activityService,
-        ActivityTypeService $activityTypeService
+        ActivityTypeService $activityTypeService,
+        ReportsService $reportService
     ) {
         $this->usersService = $usersService;
         $this->customersService = $customersService;
         $this->historiesService = $historiesService;
         $this->activityService = $activityService;
         $this->activityTypeService = $activityTypeService;
+        $this->reportService = $reportService;
         $this->users = $this->usersService->getAll();
     }
 
@@ -60,8 +64,7 @@ class CustomersController extends Controller
         $customer = $this->customersService->getOne($id);
         $activities = $this->activityService->getForCustomerPage($id);
         $activitiesType = $this->activityTypeService->getAll();
-
-        $activitiesRaport = new TimeActivesForCustomerCreator($customer);
+        $activitiesRaport = $this->reportService->timeActivitiesForCustomer($customer);
 
         return view('customers::show')
             ->with('mainTitle', 'Show and modify customer '.$customer->name)
@@ -82,7 +85,6 @@ class CustomersController extends Controller
     public function store(CustomerRequest $request): RedirectResponse
     {
         $customer = $this->customersService->store($request);
-
         $message = 'User '.$customer->user->name.' was added customer '.$customer->name;
         $this->historiesService->store(Auth::id(), $customer->id, $message);
 
