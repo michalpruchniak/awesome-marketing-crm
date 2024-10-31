@@ -11,6 +11,7 @@ use Modules\Reports\Services\Reports\Interfaces\ReportProductInterface;
 class TimeActivesForCustomer implements ReportProductInterface
 {
     private $activityService;
+
     private $customer;
 
     public function __construct(
