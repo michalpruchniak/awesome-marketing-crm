@@ -14,6 +14,4 @@ use Modules\Reports\Http\Controllers\ReportsController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('reports', ReportsController::class)->names('reports');
-});
+
