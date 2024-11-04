@@ -7,6 +7,7 @@ use DateTime;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Modules\Activities\DTO\GetAllActivitiesArgsDTO;
 use Modules\Activities\Models\Activity;
 use Modules\Activities\Repositories\ActivityRepository;
@@ -44,6 +45,12 @@ class ActivityService
 
     public function activityStatsForCustomerPage(int $id, DateTime $from, dateTime $to): Collection
     {
-        return $this->activityRepository->ActivityStatsForCustomerPage($id, $from, $to);
+        $cacheKey = "activity_stats_for_customer_{$id}";
+
+        $activities = Cache::remember($cacheKey, 1440, function () use ($id, $from, $to) {
+            return $this->activityRepository->ActivityStatsForCustomerPage($id, $from, $to);
+        });
+
+        return $activities;
     }
 }
